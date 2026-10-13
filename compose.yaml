@@ -12,6 +12,8 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql
       - ./sql/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/02-schema.sql:ro
+      - ./sql:/lab/sql:ro
     command:
       - postgres
       - -c

@@ -7,4 +7,4 @@ ALTER ROLE lab_worker SET timezone = 'UTC';
 ALTER ROLE lab_worker SET default_transaction_isolation = 'read committed';
 ALTER ROLE lab_worker SET lock_timeout = '2s';
 ALTER ROLE lab_worker SET statement_timeout = '30s';
--- 테이블별 권한은 DDL 구현 시 부여한다. 입력 수정 권한은 부여하지 않는다.
+-- 업무 테이블과 권한은 다음 초기화 파일 schema.sql에서 구성한다.
