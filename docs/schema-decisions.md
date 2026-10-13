@@ -1,52 +1,61 @@
-# 정산 테이블 설계
+# 정산 테이블 구조
 
-## 테이블 구성
+점선은 ID로 연결되는 논리적 관계입니다. 실제 FK는 없으며, 주요 컬럼만 표시했습니다.
 
-입력 점수, 정산 결과, 누적 잔액, 처리 기록을 나눠 저장합니다. 정산별 보상과 현재 잔액을 비교하고, 장애 후 처리한 범위를 확인하기 위한 구성입니다.
+```mermaid
+erDiagram
+    guild ||..o{ score_event : guild_id
+    guild ||..o{ settlement_result : guild_id
+    guild ||..o| guild_wallet : guild_id
+    settlement_job ||..o{ score_event : job_id
+    settlement_job ||..o{ settlement_result : job_id
+    settlement_job ||..o{ settlement_chunk : job_id
 
-| 테이블 | 역할 | 주요 제약 |
-|---|---|---|
-| guild | 길드 정보 | 길드 ID 중복 방지 |
-| settlement_job | 일일 정산 정보 | 같은 시즌·날짜의 정산 중복 방지 |
-| score_event | 길드별 점수 | 이벤트 ID 중복 방지 |
-| settlement_result | 정산별 길드 점수·보상 | 같은 정산·길드의 결과 중복 방지 |
-| guild_wallet | 길드별 누적 잔액 | 길드당 지갑 최대 하나 |
-| settlement_chunk | 처리 범위와 완료 기록 | 정산 내 청크 번호 중복 방지 |
+    guild {
+        bigint guild_id PK
+        text name
+    }
+    settlement_job {
+        bigint job_id PK
+        bigint season_id "시즌·날짜 조합 UNIQUE"
+        date settlement_date
+        text state "DRAFT / READY / COMPLETED"
+    }
+    score_event {
+        bigint event_id PK
+        bigint job_id
+        bigint guild_id
+        bigint score "입력 점수"
+    }
+    settlement_result {
+        bigint job_id PK "길드 ID와 복합 PK"
+        bigint guild_id PK
+        bigint total_score "점수 합계"
+        bigint reward_points "합계 / 100"
+    }
+    guild_wallet {
+        bigint guild_id PK
+        bigint balance "누적 잔액"
+    }
+    settlement_chunk {
+        bigint job_id PK "청크 번호와 복합 PK"
+        bigint chunk_no PK
+        bigint first_guild_id "처리 시작 ID"
+        bigint last_guild_id "처리 끝 ID"
+        timestamptz completed_at "처리 전 NULL"
+    }
+```
 
-결과의 `(job_id, guild_id)`를 PK로 지정해 같은 정산 결과가 두 번 저장되는 것을 막습니다. 지갑의 중복 지급도 막으려면 결과 저장, 잔액 증가, 청크 완료 기록을 하나의 트랜잭션에서 처리해야 합니다.
+청크를 처리할 때 아래 세 변경을 하나의 트랜잭션으로 묶어야 합니다. 정산 프로그램은 아직 구현 전입니다.
 
-## FK와 입력 조건
+```mermaid
+flowchart LR
+    A[결과 저장] --> B[지갑 잔액 증가] --> C[청크 완료 기록] --> D[COMMIT]
+    subgraph T[청크별 트랜잭션]
+        A
+        B
+        C
+    end
+```
 
-FK는 두지 않았습니다. 데이터를 준비할 때 정산·길드 ID가 맞는지 확인하고, 처리 후 누락된 결과가 없는지 확인할 예정입니다. 이 부분은 아직 구현 전이므로 현재 DB는 존재하지 않는 정산·길드 ID도 허용합니다. 실험 중에는 정산·길드와 확정된 입력을 변경하지 않습니다.
-
-| DB에서 검사할 조건 | 목적 |
-|---|---|
-| 점수·보상·잔액 0 이상 | 음수 입력 방지 |
-| 보상 = 총점 / 100 | 잘못된 보상 계산 방지 |
-| 청크 시작 ID ≤ 끝 ID | 잘못된 처리 범위 방지 |
-| READY부터 입력 확정 시각 필수 | 입력 준비 완료 여부 구분 |
-| COMPLETED에서만 완료 시각 기록 | 상태와 완료 시각의 불일치 방지 |
-
-CHECK는 저장된 값의 조건만 검사합니다. 점수 합계가 맞는지, 모든 청크가 처리됐는지는 프로그램에서 확인해야 합니다.
-
-## 권한
-
-관리자 계정은 테이블 생성과 데이터 준비에 사용합니다. 작업자 계정은 입력을 조회하고 정산 결과를 저장하는 데 사용합니다.
-
-| 계정 | 허용 범위 |
-|---|---|
-| lab_admin | 테이블 생성·데이터 준비·초기화·장애 실험 |
-| lab_worker | 조회·결과 추가·잔액 수정·정산 및 청크 완료 표시 |
-
-작업자에게 입력 수정, 결과 덮어쓰기·삭제, 처리 범위 변경, 테이블 생성 권한은 주지 않았습니다. 다만 잔액 수정과 완료 표시의 순서까지 권한으로 강제하지는 않습니다. 정산 프로그램에서 처리해야 합니다.
-
-## 확인 결과
-
-| 확인 항목 | 결과 |
-|---|---|
-| 중복 키·음수 값·잘못된 보상·뒤집힌 청크 범위 | 저장 거부 |
-| 완료 시각 없는 COMPLETED 상태 | 변경 거부 |
-| 작업자에게 허용한 조회·잠금·결과 저장·갱신 | 성공 |
-| 작업자의 입력 수정·결과 삭제·범위 변경·테이블 생성 | 권한 오류 |
-
-동시 실행과 장애 후 재실행에서 결과·잔액이 맞는지는 정산 프로그램 구현 후 확인합니다. 인덱스 비교를 위해 score_event에는 PK 인덱스만 둔 상태입니다.
+제약과 권한의 이유는 [schema.sql](../sql/schema.sql) 주석에 정리했습니다. 중복·잘못된 값·권한 위반은 DB에서 확인했습니다. 참조 ID 확인과 동시 실행·장애 복구 검증은 다음 단계입니다.
