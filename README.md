@@ -39,7 +39,7 @@ DB 데이터는 Docker 볼륨에 저장됩니다. 초기화 SQL은 빈 볼륨의
 
 ## 테이블과 권한
 
-`sql/schema.sql`은 6개 테이블을 하나의 트랜잭션으로 생성합니다. ID는 양수 BIGINT이며 직접 입력합니다. 시퀀스는 사용하지 않습니다. PK·UNIQUE·NOT NULL·CHECK를 구성하며 FK는 사용하지 않습니다. 정산·길드의 존재 여부는 다음 단계에서 구현할 Python 생성기·검증기가 확인합니다. score_event에는 PK 인덱스만 둡니다.
+`sql/schema.sql`은 6개 테이블을 하나의 트랜잭션으로 생성합니다. PK·UNIQUE·NOT NULL·CHECK를 구성하며 FK는 사용하지 않습니다. 정산·길드 ID는 데이터 준비와 결과 확인 과정에서 검사할 예정입니다. score_event에는 PK 인덱스만 둡니다.
 
 점수·지갑 잔액은 0 이상, 보상은 `total_score / 100`과 일치해야 합니다. 0 이상인 정수의 나눗셈이므로 설계서의 FLOOR와 같습니다. 정산 상태는 DRAFT·READY·COMPLETED입니다. READY부터 입력 확정 시각이 필요하며, 완료 시각은 COMPLETED 상태에서만 기록합니다. 청크 번호와 시작·끝 ID는 양수입니다. 시작·끝 ID의 길드가 실제로 존재할 필요는 없습니다.
 
@@ -48,7 +48,7 @@ DB 데이터는 Docker 볼륨에 저장됩니다. 초기화 SQL은 빈 볼륨의
 | lab_admin | DDL, 데이터 적재·초기화, 계측·장애 실험 |
 | lab_worker | 6개 테이블 SELECT, 결과 INSERT, 지갑 balance UPDATE, job state·completed_at UPDATE, 청크 completed_at UPDATE |
 
-작업자는 입력 수정·결과 덮어쓰기·삭제·청크 범위 변경·DDL을 할 수 없습니다. 관리자도 READY 이후에는 입력을 수정하지 않아야 합니다. CHECK는 다른 행을 검사하지 않으므로 청크 범위의 중복·누락, 대상 길드 목록, 정산 상태 변경 순서와 전체 완료 여부는 후속 생성기·정산기·검증기가 검사합니다. BIGINT 범위를 넘는 합계는 실패로 처리하며 생성기에서 데이터 규모를 제한합니다.
+작업자는 입력 수정·결과 덮어쓰기·삭제·처리 범위 변경·테이블 생성을 할 수 없습니다. 관리자도 READY 이후에는 입력을 수정하지 않아야 합니다. 대상 길드 누락과 전체 처리 완료 여부는 프로그램에서 확인할 예정입니다.
 
 이미 실행 중인 DB에 아직 테이블이 없다면 다음 명령을 사용합니다. 이미 생성된 테이블에는 재적용하지 않습니다.
 
@@ -78,7 +78,7 @@ FK가 있던 기존 DB에는 다음 변경 SQL을 한 번 실행합니다. 데�
 docker compose exec -T db psql -U lab_admin -d settlement_lab -v ON_ERROR_STOP=1 -f /lab/sql/migrations/001_remove_foreign_keys.sql
 ```
 
-실험 중 확정된 job·guild는 삭제하지 않습니다. 생성기·검증기는 아직 구현 전이므로 현재 DB에서는 해당 정산이나 길드가 없어도 양수 ID를 가진 행을 저장할 수 있습니다. 설계 판단은 [스키마 설계 근거](docs/schema-decisions.md)에 정리했습니다.
+실험 중 확정된 job·guild는 삭제하지 않습니다. ID 확인은 아직 구현 전이므로 현재 DB는 존재하지 않는 정산·길드 ID도 허용합니다. 설계 판단은 [스키마 설계 근거](docs/schema-decisions.md)에 정리했습니다.
 
 ## 다음 구현
 
