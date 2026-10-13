@@ -20,14 +20,14 @@ CREATE TABLE settlement_job (
 
 CREATE TABLE score_event (
     event_id BIGINT PRIMARY KEY CHECK (event_id > 0),
-    job_id BIGINT NOT NULL REFERENCES settlement_job (job_id),
-    guild_id BIGINT NOT NULL REFERENCES guild (guild_id),
+    job_id BIGINT NOT NULL CHECK (job_id > 0),
+    guild_id BIGINT NOT NULL CHECK (guild_id > 0),
     score BIGINT NOT NULL CHECK (score >= 0)
 );
 
 CREATE TABLE settlement_result (
-    job_id BIGINT NOT NULL REFERENCES settlement_job (job_id),
-    guild_id BIGINT NOT NULL REFERENCES guild (guild_id),
+    job_id BIGINT NOT NULL CHECK (job_id > 0),
+    guild_id BIGINT NOT NULL CHECK (guild_id > 0),
     total_score BIGINT NOT NULL CHECK (total_score >= 0),
     reward_points BIGINT NOT NULL CHECK (reward_points >= 0),
     completed_at TIMESTAMPTZ NOT NULL,
@@ -36,15 +36,15 @@ CREATE TABLE settlement_result (
 );
 
 CREATE TABLE guild_wallet (
-    guild_id BIGINT PRIMARY KEY REFERENCES guild (guild_id),
+    guild_id BIGINT PRIMARY KEY CHECK (guild_id > 0),
     balance BIGINT NOT NULL DEFAULT 0 CHECK (balance >= 0)
 );
 
 CREATE TABLE settlement_chunk (
-    job_id BIGINT NOT NULL REFERENCES settlement_job (job_id),
+    job_id BIGINT NOT NULL CHECK (job_id > 0),
     chunk_no BIGINT NOT NULL CHECK (chunk_no > 0),
-    first_guild_id BIGINT NOT NULL REFERENCES guild (guild_id),
-    last_guild_id BIGINT NOT NULL REFERENCES guild (guild_id),
+    first_guild_id BIGINT NOT NULL CHECK (first_guild_id > 0),
+    last_guild_id BIGINT NOT NULL CHECK (last_guild_id > 0),
     completed_at TIMESTAMPTZ,
     PRIMARY KEY (job_id, chunk_no),
     CHECK (first_guild_id <= last_guild_id)

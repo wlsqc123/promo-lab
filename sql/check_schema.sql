@@ -18,14 +18,24 @@ BEGIN
         INSERT INTO settlement_job (job_id, season_id, settlement_date) VALUES (2, 1, '2026-10-13');
         RAISE EXCEPTION 'job unique accepted duplicate';
     EXCEPTION WHEN unique_violation THEN NULL; END;
+    IF EXISTS (
+        SELECT 1 FROM pg_constraint c
+        JOIN pg_class t ON t.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = t.relnamespace
+        WHERE n.nspname = 'public' AND c.contype = 'f'
+          AND t.relname IN ('guild', 'settlement_job', 'score_event',
+                           'settlement_result', 'guild_wallet', 'settlement_chunk')
+    ) THEN
+        RAISE EXCEPTION 'lab tables must not have foreign keys';
+    END IF;
     BEGIN
-        INSERT INTO score_event VALUES (2, 999, 1, 0);
-        RAISE EXCEPTION 'FK accepted missing job';
-    EXCEPTION WHEN foreign_key_violation THEN NULL; END;
+        INSERT INTO score_event VALUES (2, 0, 1, 0);
+        RAISE EXCEPTION 'CHECK accepted nonpositive reference ID';
+    EXCEPTION WHEN check_violation THEN NULL; END;
     BEGIN
-        INSERT INTO score_event VALUES (2, 1, 999, 0);
-        RAISE EXCEPTION 'FK accepted missing guild';
-    EXCEPTION WHEN foreign_key_violation THEN NULL; END;
+        INSERT INTO settlement_chunk VALUES (1, 2, 0, 1, NULL);
+        RAISE EXCEPTION 'CHECK accepted nonpositive range boundary';
+    EXCEPTION WHEN check_violation THEN NULL; END;
     BEGIN
         INSERT INTO score_event VALUES (2, 1, 1, -1);
         RAISE EXCEPTION 'CHECK accepted negative score';
@@ -50,6 +60,12 @@ BEGIN
         RAISE EXCEPTION 'baseline score_event must have only PK index';
     END IF;
 END $$;
+
+-- 참조 무결성은 후속 생성기·검증기의 책임이다. DB는 양수 고아 ID를 허용한다.
+INSERT INTO score_event VALUES (2, 999, 999, 0);
+DELETE FROM score_event WHERE event_id = 2;
+INSERT INTO settlement_chunk VALUES (1, 2, 100, 200, NULL);
+DELETE FROM settlement_chunk WHERE job_id = 1 AND chunk_no = 2;
 
 SET LOCAL ROLE lab_worker;
 SELECT * FROM score_event;
