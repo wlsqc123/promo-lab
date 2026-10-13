@@ -61,7 +61,7 @@ BEGIN
     END IF;
 END $$;
 
--- 참조 무결성은 후속 생성기·검증기의 책임이다. DB는 양수 고아 ID를 허용한다.
+-- job·guild 존재 여부는 후속 생성기·검증기에서 확인. DB는 존재하지 않는 양수 ID도 허용.
 INSERT INTO score_event VALUES (2, 999, 999, 0);
 DELETE FROM score_event WHERE event_id = 2;
 INSERT INTO settlement_chunk VALUES (1, 2, 100, 200, NULL);

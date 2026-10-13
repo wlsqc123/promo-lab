@@ -72,14 +72,14 @@ docker compose up -d --wait db
 
 ## FK가 있던 기존 DB 변경
 
-기존 DB에는 다음 마이그레이션을 한 번 적용합니다. 데이터 삭제 없이 FK를 제거하고 양수 ID 검사를 추가합니다. 새 볼륨은 schema.sql에 반영돼 있으므로 이 명령이 필요 없습니다.
+기존 DB에는 다음 마이그레이션을 한 번 적용합니다. 데이터 삭제 없이 FK를 제거하고 양수 ID 검사를 추가합니다. 새 볼륨에는 변경된 schema.sql이 적용되므로 이 명령이 필요 없습니다.
 
 ```powershell
 docker compose exec -T db psql -U lab_admin -d settlement_lab -v ON_ERROR_STOP=1 -f /lab/sql/migrations/001_remove_foreign_keys.sql
 ```
 
-실험 중 확정된 job·guild는 삭제하지 않습니다. 생성기·검증기는 아직 구현 전이므로 현재 DB는 고아 데이터를 차단하지 않습니다. 설계 판단은 [스키마 설계 근거](docs/schema-decisions.md)에 정리했습니다.
+실험 중 확정된 job·guild는 삭제하지 않습니다. 생성기·검증기는 아직 구현 전이므로 현재 DB는 존재하지 않는 job·guild ID를 가진 데이터도 허용합니다. 설계 판단은 [스키마 설계 근거](docs/schema-decisions.md)에 정리했습니다.
 
 ## 다음 구현
 
-고정 seed·독립 기대값 생성 → 단일 정산·검증 → 동시 실행·장애 주입 → 측정 순으로 진행한다. Redis는 핵심 실험 완료 후 추가합니다.
+고정 seed·독립 기대값 생성 → 단일 정산·검증 → 동시 실행·장애 주입 → 측정 순으로 진행합니다. Redis는 핵심 실험 완료 후 추가합니다.
