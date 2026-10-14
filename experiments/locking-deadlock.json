@@ -1,0 +1,46 @@
+{
+  "scenario": "deadlock",
+  "status": "passed",
+  "database": "locking_28f3f4447a904269bf2d5d1a5dce371e",
+  "folder": "results/locking-deadlock-28f3f4447a904269bf2d5d1a5dce371e",
+  "lock_observation": [
+    45547,
+    "Lock",
+    "transactionid",
+    [
+      45545
+    ]
+  ],
+  "first_retry": {
+    "chunk": 1,
+    "retry": 1,
+    "sqlstate": "40P01"
+  },
+  "rollback_after_deadlock": true,
+  "worker_exit": 0,
+  "settlement": {
+    "processed_chunks": 10,
+    "skipped_chunks": 0,
+    "retries": 1,
+    "retry_events": [
+      {
+        "chunk": 1,
+        "retry": 1,
+        "sqlstate": "40P01"
+      }
+    ],
+    "elapsed_seconds": 1.162559947999398
+  },
+  "verification": {
+    "status": "passed",
+    "guilds": 100,
+    "events": 10000,
+    "chunks": 10,
+    "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+    "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+    "data_hash": "ee7a9b9d3a6572bf8a317144360b463ba4bcd06c9633288065a40ab370c8d9d2"
+  },
+  "rerun_unchanged": true,
+  "lock_timeout": "2s",
+  "worker_deadlock_timeout": "1s"
+}

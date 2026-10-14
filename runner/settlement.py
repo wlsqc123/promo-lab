@@ -126,6 +126,7 @@ def pause_for_termination(conn, chunk_no, point):
 def settle():
     start = time.perf_counter()
     processed = skipped = retries = 0
+    retry_events = []
     with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True,
                          application_name=os.environ.get("WORKER_NAME", "settlement-worker")) as conn:
         job = conn.execute("SELECT state FROM settlement_job WHERE job_id=1").fetchone()
@@ -147,8 +148,9 @@ def settle():
                     if exc.sqlstate not in ("40P01", "55P03", "40001") or attempt == 3:
                         raise
                     retries += 1
-                    print(json.dumps({"chunk": chunk_no, "retry": attempt + 1,
-                                      "sqlstate": exc.sqlstate}))
+                    event = {"chunk": chunk_no, "retry": attempt + 1, "sqlstate": exc.sqlstate}
+                    retry_events.append(event)
+                    print(json.dumps(event), flush=True)
                     time.sleep(0.05 * 2 ** attempt + random.uniform(0, 0.05))
         with conn.transaction():
             conn.execute("UPDATE settlement_job SET state='COMPLETED', "
@@ -156,7 +158,8 @@ def settle():
                          "AND NOT EXISTS (SELECT 1 FROM settlement_chunk "
                          "WHERE job_id=1 AND completed_at IS NULL)")
     save_report("settle", {"processed_chunks": processed, "skipped_chunks": skipped,
-                           "retries": retries, "elapsed_seconds": time.perf_counter() - start})
+                           "retries": retries, "retry_events": retry_events,
+                           "elapsed_seconds": time.perf_counter() - start})
 
 
 def compare(conn, expected):

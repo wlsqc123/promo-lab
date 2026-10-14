@@ -127,4 +127,16 @@ docker compose run --rm --build runner terminate --point before-commit
 docker compose run --rm runner terminate --point after-commit
 ```
 
-실행 기록은 `results/termination-*`에 저장됩니다. [실험 결과](docs/termination.md)에 종료 지점과 복구 결과를 정리했습니다. 다음은 락 시간 초과와 데드락 재시도 실험입니다.
+실행 기록은 `results/termination-*`에 저장됩니다. [실험 결과](docs/termination.md)에 종료 지점과 복구 결과를 정리했습니다.
+
+## 락 시간 초과와 데드락
+
+별도 DB에서 지갑을 잠가 시간 초과·데드락을 만들고, 같은 순서로 잠근 경우와 비교합니다.
+
+```powershell
+docker compose run --rm --build runner locking --scenario timeout
+docker compose run --rm runner locking --scenario deadlock
+docker compose run --rm runner locking --scenario ordered
+```
+
+SQLSTATE·재시도·롤백과 최종 결과를 확인합니다. 로그와 결과는 `results/locking-*`에 저장되며, [실험 결과](docs/locking.md)를 정리했습니다. 다음은 인덱스별 실행계획과 처리시간 비교입니다.

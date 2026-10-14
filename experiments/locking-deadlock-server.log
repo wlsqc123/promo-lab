@@ -1,0 +1,8 @@
+settlement-lab-db-1  | 2026-10-14 07:57:15.750 UTC [45547] ERROR:  deadlock detected
+settlement-lab-db-1  | 2026-10-14 07:57:15.750 UTC [45547] DETAIL:  Process 45547 waits for ShareLock on transaction 1387; blocked by process 45545.
+settlement-lab-db-1  | 	Process 45545 waits for ShareLock on transaction 1388; blocked by process 45547.
+settlement-lab-db-1  | 	Process 45547: UPDATE guild_wallet SET balance=balance+$1 WHERE guild_id=$2
+settlement-lab-db-1  | 	Process 45545: SELECT guild_id FROM guild_wallet WHERE guild_id=$1 FOR UPDATE
+settlement-lab-db-1  | 2026-10-14 07:57:15.750 UTC [45547] HINT:  See server log for query details.
+settlement-lab-db-1  | 2026-10-14 07:57:15.750 UTC [45547] CONTEXT:  while updating tuple (0,10) in relation "guild_wallet"
+settlement-lab-db-1  | 2026-10-14 07:57:15.750 UTC [45547] STATEMENT:  UPDATE guild_wallet SET balance=balance+$1 WHERE guild_id=$2

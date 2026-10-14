@@ -1,0 +1,34 @@
+{
+  "scenario": "ordered",
+  "status": "passed",
+  "database": "locking_c5acc92056ec4ea0a9e6eb003f9d20cd",
+  "folder": "results/locking-ordered-c5acc92056ec4ea0a9e6eb003f9d20cd",
+  "lock_observation": [
+    45881,
+    "Lock",
+    "transactionid",
+    [
+      45879
+    ]
+  ],
+  "worker_exit": 0,
+  "settlement": {
+    "processed_chunks": 10,
+    "skipped_chunks": 0,
+    "retries": 0,
+    "retry_events": [],
+    "elapsed_seconds": 0.11654337199979636
+  },
+  "verification": {
+    "status": "passed",
+    "guilds": 100,
+    "events": 10000,
+    "chunks": 10,
+    "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+    "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+    "data_hash": "d442336d81883f5ce3d8ac136009ca09998f772625b651d40b8c0883b82403ef"
+  },
+  "rerun_unchanged": true,
+  "lock_timeout": "2s",
+  "worker_deadlock_timeout": "1s"
+}

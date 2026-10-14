@@ -57,6 +57,8 @@ duplicate = commands.add_parser("duplicate", help="별도 DB에서 같은 정산
 duplicate.add_argument("--workers", type=int, choices=[2, 4, 8], default=2)
 termination = commands.add_parser("terminate", help="작업자 강제 종료 후 재실행 확인")
 termination.add_argument("--point", choices=["before-commit", "after-commit"], required=True)
+locking = commands.add_parser("locking", help="락 시간 초과·데드락·같은 순서 잠금 확인")
+locking.add_argument("--scenario", choices=["timeout", "deadlock", "ordered"], required=True)
 args = parser.parse_args()
 if args.command == "prepare":
     if not (2 <= args.guilds <= 10000 and 0 <= args.events <= 1000000
@@ -74,9 +76,12 @@ try:
     elif args.command == "duplicate":
         from runner.concurrent import experiment
         experiment(args.workers)
-    else:
+    elif args.command == "terminate":
         from runner.termination import experiment
         experiment(args.point)
+    else:
+        from runner.locking import experiment
+        experiment(args.scenario)
 except (psycopg.Error, ValueError, OSError, RuntimeError, subprocess.TimeoutExpired) as exc:
     print(json.dumps({"status": "failed", "error": str(exc),
                       "sqlstate": getattr(exc, "sqlstate", None)}, ensure_ascii=False))
