@@ -1,6 +1,6 @@
 # PostgreSQL 정산 실험 개발 환경
 
-개인 DBA 포트폴리오 실험용 환경입니다. 정산 로직과 실험 시나리오는 다음 단계에서 구현합니다.
+개인 DBA 포트폴리오 실험용 환경입니다. 현재는 작은 데이터의 단일 정산과 재실행을 확인할 수 있습니다.
 
 ## 시작
 
@@ -39,7 +39,7 @@ DB 데이터는 Docker 볼륨에 저장됩니다. 초기화 SQL은 빈 볼륨의
 
 ## 테이블과 권한
 
-`sql/schema.sql`은 6개 테이블을 하나의 트랜잭션으로 생성합니다. PK·UNIQUE·NOT NULL·CHECK를 구성하며 FK는 사용하지 않습니다. 정산·길드 ID는 데이터 준비와 결과 확인 과정에서 검사할 예정입니다. score_event에는 PK 인덱스만 둡니다.
+`sql/schema.sql`은 6개 테이블을 하나의 트랜잭션으로 생성합니다. PK·UNIQUE·NOT NULL·CHECK를 구성하며 FK는 사용하지 않습니다. 데이터 준비 시 정산·길드 ID를 지정하고, verify에서 준비한 목록과 비교합니다. score_event에는 PK 인덱스만 둡니다.
 
 점수·지갑 잔액은 0 이상, 보상은 `total_score / 100`과 일치해야 합니다. 0 이상인 정수의 나눗셈이므로 설계서의 FLOOR와 같습니다. 정산 상태는 DRAFT·READY·COMPLETED입니다. READY부터 입력 확정 시각이 필요하며, 완료 시각은 COMPLETED 상태에서만 기록합니다. 청크 번호와 시작·끝 ID는 양수입니다. 시작·끝 ID의 길드가 실제로 존재할 필요는 없습니다.
 
@@ -48,7 +48,7 @@ DB 데이터는 Docker 볼륨에 저장됩니다. 초기화 SQL은 빈 볼륨의
 | lab_admin | DDL, 데이터 적재·초기화, 계측·장애 실험 |
 | lab_worker | 6개 테이블 SELECT, 결과 INSERT, 지갑 balance UPDATE, job state·completed_at UPDATE, 청크 completed_at UPDATE |
 
-작업자는 입력 수정·결과 덮어쓰기·삭제·처리 범위 변경·테이블 생성을 할 수 없습니다. 관리자도 READY 이후에는 입력을 수정하지 않아야 합니다. 대상 길드 누락과 전체 처리 완료 여부는 프로그램에서 확인할 예정입니다.
+작업자는 입력 수정·결과 덮어쓰기·삭제·처리 범위 변경·테이블 생성을 할 수 없습니다. 관리자도 READY 이후에는 입력을 수정하지 않아야 합니다. 대상 길드 목록과 전체 처리 완료 여부는 verify에서 확인합니다.
 
 이미 실행 중인 DB에 아직 테이블이 없다면 다음 명령을 사용합니다. 이미 생성된 테이블에는 재적용하지 않습니다.
 
@@ -78,8 +78,32 @@ FK가 있던 기존 DB에는 다음 변경 SQL을 한 번 실행합니다. 데�
 docker compose exec -T db psql -U lab_admin -d settlement_lab -v ON_ERROR_STOP=1 -f /lab/sql/migrations/001_remove_foreign_keys.sql
 ```
 
-실험 중 확정된 job·guild는 삭제하지 않습니다. ID 확인은 아직 구현 전이므로 현재 DB는 존재하지 않는 정산·길드 ID도 허용합니다. 설계 판단은 [스키마 설계 근거](docs/schema-decisions.md)에 정리했습니다.
+실험 중 확정된 job·guild는 삭제하지 않습니다. DB에는 FK가 없어 존재하지 않는 정산·길드 ID도 허용하지만, verify는 준비한 목록과 다른 데이터를 오류로 처리합니다. 설계 판단은 [스키마 설계 근거](docs/schema-decisions.md)에 정리했습니다.
 
-## 다음 구현
+## 작은 데이터로 정산 실행
 
-고정 seed로 데이터·기대값 생성 → 단일 정산·검증 → 동시 실행·장애 주입 → 측정 순으로 진행합니다. Redis는 핵심 실험 완료 후 추가합니다.
+현재는 비어 있는 DB에 정산 1개를 준비합니다. 기본값은 seed 42, 길드 100개, 이벤트 1만 개, 청크당 길드 10개입니다. 마지막 길드는 이벤트 없이 준비해 0점 결과도 확인합니다.
+
+```powershell
+docker compose run --rm --build runner prepare
+docker compose run --rm runner settle
+docker compose run --rm runner verify
+docker compose run --rm runner settle
+docker compose run --rm runner verify
+```
+
+prepare는 관리자 계정으로 데이터를 넣고, settle·verify는 작업자 계정을 사용합니다. 예상 점수·보상은 DB에 넣기 전에 Python에서 계산해 `results/job-1/expected.json`에 저장합니다. 완료된 정산은 길드별 결과·잔액·입력·청크 목록을 비교합니다.
+
+실행 기록은 `results/job-1/`에 저장됩니다. 재실행 후 처리한 청크가 0개이고 두 verify 기록의 `data_hash`가 같으면 결과와 잔액, 완료 기록이 유지된 것입니다. 해시 비교와 함께 모든 길드의 값이 예상값과 같은지도 확인합니다.
+
+데이터나 예상값 파일이 이미 있으면 prepare는 중단합니다. 기존 데이터를 덮어쓰지 않습니다. 데이터를 다시 준비하려면 DB와 예상값 파일을 함께 별도로 보관한 뒤 초기화해야 합니다. 준비 도중 실패한 경우 예상값 파일이 남을 수 있으므로 DB 상태부터 확인합니다.
+
+완료된 기본 데이터에서 다음 명령으로 오류 감지와 청크 롤백도 확인할 수 있습니다. 임시 변경은 모두 롤백합니다.
+
+```powershell
+docker compose run --rm --entrypoint python runner -m runner.check_single
+```
+
+2026-10-14에 기본 데이터의 단일 정산과 재실행, 잘못된 잔액·결과 누락·입력 변경 감지, 중복 결과 거부와 지갑 누락 시 청크 롤백을 확인했습니다. 처리 오류는 실패로 종료하며, 데드락·락 시간 초과·직렬화 실패는 최초 시도 외 최대 3회 재시도합니다. 연결 종료 후 COMMIT 성공 여부를 확인하는 기능과 프로세스 종료 실험은 아직 구현 전입니다.
+
+다음 단계는 같은 정산에 작업자 2개를 동시에 실행하는 실험입니다. 이후 장애 주입과 성능 측정을 진행합니다.

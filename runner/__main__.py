@@ -7,6 +7,8 @@ from pathlib import Path
 
 import psycopg
 
+from runner.settlement import prepare, settle, verify
+
 
 def doctor():
     with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True) as conn:
@@ -41,6 +43,30 @@ def doctor():
 
 
 parser = argparse.ArgumentParser(description="PostgreSQL 정산 실험 CLI")
-parser.add_argument("command", choices=["doctor"])
-parser.parse_args()
-doctor()
+commands = parser.add_subparsers(dest="command", required=True)
+commands.add_parser("doctor")
+data = commands.add_parser("prepare", help="빈 DB에 실험 데이터와 예상값 준비")
+data.add_argument("--seed", type=int, default=42)
+data.add_argument("--guilds", type=int, default=100)
+data.add_argument("--events", type=int, default=10000)
+data.add_argument("--chunk-size", type=int, default=10)
+commands.add_parser("settle", help="job 1 정산")
+commands.add_parser("verify", help="완료된 정산을 예상값과 비교")
+args = parser.parse_args()
+if args.command == "prepare":
+    if not (2 <= args.guilds <= 10000 and 0 <= args.events <= 1000000
+            and 1 <= args.chunk_size <= args.guilds):
+        parser.error("길드 2~10000, 이벤트 0~1000000, 청크 크기 1~길드 수를 사용하세요.")
+try:
+    if args.command == "doctor":
+        doctor()
+    elif args.command == "prepare":
+        prepare(args)
+    elif args.command == "settle":
+        settle()
+    else:
+        verify()
+except (psycopg.Error, ValueError, OSError) as exc:
+    print(json.dumps({"status": "failed", "error": str(exc),
+                      "sqlstate": getattr(exc, "sqlstate", None)}, ensure_ascii=False))
+    raise SystemExit(1)

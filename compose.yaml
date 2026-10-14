@@ -40,6 +40,7 @@ services:
     build: .
     environment:
       DATABASE_URL: postgresql://lab_worker:local_lab_worker@db:5432/settlement_lab
+      ADMIN_DATABASE_URL: postgresql://lab_admin:local_lab_admin@db:5432/settlement_lab
       TZ: UTC
     volumes:
       - ./runner:/app/runner:ro
