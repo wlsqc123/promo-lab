@@ -2,6 +2,7 @@ import hashlib
 import json
 import os
 import random
+import signal
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -106,7 +107,20 @@ def settle_chunk(conn, chunk_no):
                 raise ValueError("보상을 넣을 지갑이 없습니다.")
         conn.execute("UPDATE settlement_chunk SET completed_at=clock_timestamp() "
                      "WHERE job_id=1 AND chunk_no=%s", (chunk_no,))
+        pause_for_termination(conn, chunk_no, "before-commit")
+    pause_for_termination(conn, chunk_no, "after-commit")
     return True
+
+
+def pause_for_termination(conn, chunk_no, point):
+    # 종료 실험에서 첫 청크만 지정 지점에 멈추고, 부모 프로세스가 SIGKILL로 종료.
+    if chunk_no == 1 and os.environ.get("CRASH_POINT") == point:
+        marker = Path(os.environ["CRASH_MARKER"])
+        temporary = marker.with_suffix(".tmp")
+        temporary.write_text(json.dumps({"point": point, "chunk_no": chunk_no,
+                                        "backend_pid": conn.info.backend_pid}), encoding="utf-8")
+        temporary.replace(marker)
+        signal.pause()
 
 
 def settle():

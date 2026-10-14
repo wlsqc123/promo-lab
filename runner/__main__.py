@@ -55,6 +55,8 @@ commands.add_parser("settle", help="job 1 정산")
 commands.add_parser("verify", help="완료된 정산을 예상값과 비교")
 duplicate = commands.add_parser("duplicate", help="별도 DB에서 같은 정산을 동시에 실행")
 duplicate.add_argument("--workers", type=int, choices=[2, 4, 8], default=2)
+termination = commands.add_parser("terminate", help="작업자 강제 종료 후 재실행 확인")
+termination.add_argument("--point", choices=["before-commit", "after-commit"], required=True)
 args = parser.parse_args()
 if args.command == "prepare":
     if not (2 <= args.guilds <= 10000 and 0 <= args.events <= 1000000
@@ -69,9 +71,12 @@ try:
         settle()
     elif args.command == "verify":
         verify()
-    else:
+    elif args.command == "duplicate":
         from runner.concurrent import experiment
         experiment(args.workers)
+    else:
+        from runner.termination import experiment
+        experiment(args.point)
 except (psycopg.Error, ValueError, OSError, RuntimeError, subprocess.TimeoutExpired) as exc:
     print(json.dumps({"status": "failed", "error": str(exc),
                       "sqlstate": getattr(exc, "sqlstate", None)}, ensure_ascii=False))

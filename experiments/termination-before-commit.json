@@ -1,0 +1,29 @@
+{
+  "point": "before-commit",
+  "status": "passed",
+  "database": "termination_f22e8c0c5c3548baa3a261be0f013946",
+  "folder": "results/termination-before-commit-f22e8c0c5c3548baa3a261be0f013946",
+  "paused_session": [
+    "idle in transaction",
+    true
+  ],
+  "worker_exit": -9,
+  "results_after_termination": 0,
+  "completed_chunks_after_termination": 0,
+  "recovery": {
+    "processed_chunks": 10,
+    "skipped_chunks": 0,
+    "retries": 0,
+    "elapsed_seconds": 0.08272423699963838
+  },
+  "verification": {
+    "status": "passed",
+    "guilds": 100,
+    "events": 10000,
+    "chunks": 10,
+    "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+    "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+    "data_hash": "7dcb7c0a1ba0ac6436580b016defa76f89bcf961e7cca11dac80f6392f9dc35e"
+  },
+  "rerun_unchanged": true
+}

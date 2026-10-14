@@ -84,4 +84,4 @@ flowchart LR
     end
 ```
 
-제약과 권한의 이유는 [schema.sql](../sql/schema.sql) 주석에 정리했습니다. 단일 정산·재실행·동시 중복 실행을 확인했으며, 프로세스 종료 실험은 다음 단계입니다.
+제약과 권한의 이유는 [schema.sql](../sql/schema.sql) 주석에 정리했습니다. 단일 정산·재실행·동시 중복 실행과 [작업자 강제 종료 후 재실행](termination.md)을 확인했습니다.

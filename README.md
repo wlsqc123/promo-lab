@@ -104,7 +104,7 @@ prepare는 관리자 계정으로 데이터를 넣고, settle·verify는 작업�
 docker compose run --rm --entrypoint python runner -m runner.check_single
 ```
 
-2026-10-14에 기본 데이터의 단일 정산과 재실행, 잘못된 잔액·결과 누락·입력 변경 감지, 중복 결과 거부와 지갑 누락 시 청크 롤백을 확인했습니다. 처리 오류는 실패로 종료하며, 데드락·락 시간 초과·직렬화 실패는 최초 시도 외 최대 3회 재시도합니다. 연결 종료 후 COMMIT 성공 여부를 확인하는 기능과 프로세스 종료 실험은 아직 구현 전입니다.
+2026-10-14에 기본 데이터의 단일 정산과 재실행, 잘못된 잔액·결과 누락·입력 변경 감지, 중복 결과 거부와 지갑 누락 시 청크 롤백을 확인했습니다. 처리 오류는 실패로 종료하며, 데드락·락 시간 초과·직렬화 실패는 최초 시도 외 최대 3회 재시도합니다. 연결 종료 후 COMMIT 성공 여부를 확인하는 기능은 아직 구현 전입니다.
 
 ## 같은 정산을 동시에 실행
 
@@ -116,4 +116,15 @@ docker compose run --rm runner duplicate --workers 4
 docker compose run --rm runner duplicate --workers 8
 ```
 
-잠금 대기 관측, 길드별 결과·잔액 비교, 완료 후 재실행 확인 중 하나라도 실패하면 명령이 실패합니다. [실행 결과](docs/duplicate-execution.md)를 정리했습니다. 다음은 처리 중 프로세스를 종료한 뒤 다시 실행하는 실험입니다.
+잠금 대기 관측, 길드별 결과·잔액 비교, 완료 후 재실행 확인 중 하나라도 실패하면 명령이 실패합니다. [실행 결과](docs/duplicate-execution.md)를 정리했습니다.
+
+## 작업자 강제 종료 후 재실행
+
+첫 청크의 커밋 전·직후에 작업자를 강제 종료하고, 별도 실험 DB에서 종료 후 상태와 재실행 결과를 확인합니다. 기존 DB는 변경하지 않습니다.
+
+```powershell
+docker compose run --rm --build runner terminate --point before-commit
+docker compose run --rm runner terminate --point after-commit
+```
+
+실행 기록은 `results/termination-*`에 저장됩니다. [실험 결과](docs/termination.md)에 종료 지점과 복구 결과를 정리했습니다. 다음은 락 시간 초과와 데드락 재시도 실험입니다.
