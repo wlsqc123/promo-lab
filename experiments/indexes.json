@@ -1,0 +1,255 @@
+{
+  "status": "passed",
+  "folder": "results/indexes-663a516d77f24615bb314ea25ae8b447",
+  "events_per_case": 1000000,
+  "guilds": 10000,
+  "jobs": 4,
+  "seed": 42,
+  "input_file_sha256": "d4a81bd7b57e7ea798a8249ec3f041ef9a66e0b3399fd930dc9b4f2f2d180a6d",
+  "query_parameters": [
+    1,
+    1,
+    100
+  ],
+  "repetitions": 5,
+  "warmups_per_case": 1,
+  "cases": {
+    "baseline": {
+      "load_seconds": 1.2123744929995155,
+      "indexes": [
+        [
+          "score_event_pkey",
+          22487040
+        ]
+      ],
+      "index_bytes": 22487040,
+      "client_median_ms": 28.391242998623056,
+      "client_min_ms": 25.600606000807602,
+      "client_max_ms": 59.640117000526516,
+      "explain_execution_ms": 67.4,
+      "plan_rows": 2061,
+      "actual_rows": 100.0,
+      "shared_hit_blocks": 2024,
+      "shared_read_blocks": 5412,
+      "scans": [
+        {
+          "Node Type": "Seq Scan",
+          "Actual Rows": 850.67,
+          "Actual Loops": 3,
+          "Plan Rows": 961,
+          "Rows Removed by Filter": 332483
+        }
+      ]
+    },
+    "composite": {
+      "load_seconds": 2.8659876810015703,
+      "indexes": [
+        [
+          "score_event_job_guild",
+          10100736
+        ],
+        [
+          "score_event_pkey",
+          22487040
+        ]
+      ],
+      "index_bytes": 32587776,
+      "client_median_ms": 2.670033001777483,
+      "client_min_ms": 2.13184799940791,
+      "client_max_ms": 2.9612889993586577,
+      "explain_execution_ms": 2.17,
+      "plan_rows": 2265,
+      "actual_rows": 100.0,
+      "shared_hit_blocks": 2203,
+      "shared_read_blocks": 0,
+      "scans": [
+        {
+          "Node Type": "Bitmap Heap Scan",
+          "Actual Rows": 2552.0,
+          "Actual Loops": 1,
+          "Plan Rows": 2567
+        },
+        {
+          "Node Type": "Bitmap Index Scan",
+          "Index Name": "score_event_job_guild",
+          "Actual Rows": 2552.0,
+          "Actual Loops": 1,
+          "Plan Rows": 2567
+        }
+      ]
+    },
+    "covering": {
+      "load_seconds": 3.276595447001455,
+      "indexes": [
+        [
+          "score_event_job_guild",
+          52502528
+        ],
+        [
+          "score_event_pkey",
+          22487040
+        ]
+      ],
+      "index_bytes": 74989568,
+      "client_median_ms": 0.651032998575829,
+      "client_min_ms": 0.5921980009588879,
+      "client_max_ms": 0.728352002624888,
+      "explain_execution_ms": 0.389,
+      "plan_rows": 2162,
+      "actual_rows": 100.0,
+      "shared_hit_blocks": 21,
+      "shared_read_blocks": 0,
+      "scans": [
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "score_event_job_guild",
+          "Actual Rows": 2552.0,
+          "Actual Loops": 1,
+          "Plan Rows": 2434,
+          "Heap Fetches": 0
+        }
+      ]
+    }
+  },
+  "measurements": [
+    {
+      "case": "baseline",
+      "repetition": 0,
+      "client_ms": 26.212411998130847,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "composite",
+      "repetition": 0,
+      "client_ms": 24.898514999222243,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "covering",
+      "repetition": 0,
+      "client_ms": 1.0706389984989073,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "baseline",
+      "repetition": 1,
+      "client_ms": 28.33347900013905,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "covering",
+      "repetition": 1,
+      "client_ms": 0.651032998575829,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "composite",
+      "repetition": 1,
+      "client_ms": 2.3588549993291963,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "covering",
+      "repetition": 2,
+      "client_ms": 0.5921980009588879,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "baseline",
+      "repetition": 2,
+      "client_ms": 54.18785000074422,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "composite",
+      "repetition": 2,
+      "client_ms": 2.7263519987172913,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "covering",
+      "repetition": 3,
+      "client_ms": 0.6384230000548996,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "composite",
+      "repetition": 3,
+      "client_ms": 2.13184799940791,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "baseline",
+      "repetition": 3,
+      "client_ms": 25.600606000807602,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "composite",
+      "repetition": 4,
+      "client_ms": 2.670033001777483,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "covering",
+      "repetition": 4,
+      "client_ms": 0.662852999084862,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "baseline",
+      "repetition": 4,
+      "client_ms": 59.640117000526516,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "composite",
+      "repetition": 5,
+      "client_ms": 2.9612889993586577,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "baseline",
+      "repetition": 5,
+      "client_ms": 28.391242998623056,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    },
+    {
+      "case": "covering",
+      "repetition": 5,
+      "client_ms": 0.728352002624888,
+      "rows": 100,
+      "result_hash": "f1ee8d8d0ebde8a533346dfe8aa6ab1f07b124b1e8f5faf2eefecbd09633a2b8"
+    }
+  ],
+  "environment": {
+    "postgresql": "PostgreSQL 18.6 (Debian 18.6-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "psycopg": "3.3.6",
+    "db_settings": {
+      "effective_cache_size": "524288",
+      "fsync": "on",
+      "max_parallel_workers_per_gather": "2",
+      "random_page_cost": "4",
+      "shared_buffers": "16384",
+      "synchronous_commit": "on",
+      "work_mem": "4096"
+    }
+  }
+}

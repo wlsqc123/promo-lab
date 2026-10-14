@@ -141,7 +141,7 @@ docker compose run --rm runner locking --scenario deadlock
 docker compose run --rm runner locking --scenario ordered
 ```
 
-SQLSTATE·재시도·롤백과 최종 결과를 확인합니다. 로그와 결과는 `results/locking-*`에 저장되며, [실험 결과](docs/locking.md)를 정리했습니다. 다음은 인덱스별 실행계획과 처리시간 비교입니다.
+SQLSTATE·재시도·롤백과 최종 결과를 확인합니다. 로그와 결과는 `results/locking-*`에 저장되며, [실험 결과](docs/locking.md)를 정리했습니다.
 
 ## 유저·길드 점수 동시 갱신
 
@@ -152,3 +152,13 @@ docker compose run --rm --build runner score-updates
 ```
 
 기본값은 유저당 50회 요청입니다. 각각 워밍업 1회·측정 5회를 실행하며, `--requests-per-user`로 요청 수를 바꿀 수 있습니다. 기존 데이터는 유지하고, 기록은 `results/score-updates-*`에 저장합니다. [측정 결과와 조건](docs/score-updates.md)을 정리했습니다.
+
+## 점수 집계 인덱스 비교
+
+같은 데이터로 PK만 있는 상태, 복합 인덱스, score를 포함한 커버링 인덱스를 비교합니다. 별도 DB에 세 테이블을 만들며 기존 데이터는 유지합니다.
+
+```powershell
+docker compose run --rm --build runner indexes
+```
+
+기본값은 길드 1만 개·정산 4개·구성별 이벤트 100만 개입니다. `--events`로 구성별 이벤트 수를 바꿀 수 있습니다. 조회는 워밍업 1회·측정 5회, 적재 비용은 1회 기록합니다. 입력·예상값·실행계획·CSV는 `results/indexes-*`에 저장합니다. [실행계획과 비용 비교](docs/indexes.md)를 정리했습니다.
