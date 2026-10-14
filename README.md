@@ -2,7 +2,7 @@
 
 개인 DBA 포트폴리오 실험용 환경입니다. 현재는 작은 데이터의 단일 정산과 재실행을 확인할 수 있습니다.
 
-길드원 최대 40명이 점수를 갱신하는 실무 환경에서의 고민을 바탕으로 합니다. 현재는 확정된 입력의 정산을 확인하며, 유저들의 동시 점수 갱신은 아직 실험하지 않았습니다. [실험 배경과 구조](docs/schema-decisions.md)를 정리했습니다.
+길드원 최대 40명이 점수를 갱신하는 실무 환경에서의 고민을 바탕으로 합니다. 확정된 입력의 정산과 별도 테이블의 동시 점수 갱신을 확인했습니다. [실험 배경과 구조](docs/schema-decisions.md)를 정리했습니다.
 
 ## 시작
 
@@ -142,3 +142,13 @@ docker compose run --rm runner locking --scenario ordered
 ```
 
 SQLSTATE·재시도·롤백과 최종 결과를 확인합니다. 로그와 결과는 `results/locking-*`에 저장되며, [실험 결과](docs/locking.md)를 정리했습니다. 다음은 인덱스별 실행계획과 처리시간 비교입니다.
+
+## 유저·길드 점수 동시 갱신
+
+40개 연결로 유저별 점수와 길드 공용 score를 같은 트랜잭션에서 갱신합니다. 한 길드에 집중한 경우와 네 길드로 나눈 경우를 별도 DB에서 비교합니다.
+
+```powershell
+docker compose run --rm --build runner score-updates
+```
+
+기본값은 유저당 50회 요청입니다. 각각 워밍업 1회·측정 5회를 실행하며, `--requests-per-user`로 요청 수를 바꿀 수 있습니다. 기존 데이터는 유지하고, 기록은 `results/score-updates-*`에 저장합니다. [측정 결과와 조건](docs/score-updates.md)을 정리했습니다.

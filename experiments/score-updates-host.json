@@ -1,0 +1,34 @@
+{
+  "memory_bytes": 34282385408,
+  "database_limits": {
+    "NanoCpus": 2000000000,
+    "Memory": 2147483648,
+    "ShmSize": 268435456
+  },
+  "cpu": {
+    "Name": "AMD Ryzen 5 5600X 6-Core Processor             ",
+    "NumberOfCores": 6,
+    "NumberOfLogicalProcessors": 12
+  },
+  "storage_driver": "overlay2",
+  "disks": [
+    {
+      "FriendlyName": "SHGP31-500GM",
+      "MediaType": "SSD",
+      "BusType": "NVMe",
+      "Size": 500107862016
+    },
+    {
+      "FriendlyName": "Realtek RTL9210 NVME",
+      "MediaType": "SSD",
+      "BusType": "USB",
+      "Size": 1000204886016
+    },
+    {
+      "FriendlyName": "Samsung SSD 980 PRO 2TB",
+      "MediaType": "SSD",
+      "BusType": "NVMe",
+      "Size": 2000398934016
+    }
+  ]
+}

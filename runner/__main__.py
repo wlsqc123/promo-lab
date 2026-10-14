@@ -59,7 +59,11 @@ termination = commands.add_parser("terminate", help="작업자 강제 종료 후
 termination.add_argument("--point", choices=["before-commit", "after-commit"], required=True)
 locking = commands.add_parser("locking", help="락 시간 초과·데드락·같은 순서 잠금 확인")
 locking.add_argument("--scenario", choices=["timeout", "deadlock", "ordered"], required=True)
+scores = commands.add_parser("score-updates", help="40개 연결의 유저·길드 점수 갱신 비교")
+scores.add_argument("--requests-per-user", type=int, default=50)
 args = parser.parse_args()
+if args.command == "score-updates" and not 1 <= args.requests_per_user <= 1000:
+    parser.error("유저당 요청 수는 1~1000을 사용하세요.")
 if args.command == "prepare":
     if not (2 <= args.guilds <= 10000 and 0 <= args.events <= 1000000
             and 1 <= args.chunk_size <= args.guilds):
@@ -79,9 +83,12 @@ try:
     elif args.command == "terminate":
         from runner.termination import experiment
         experiment(args.point)
-    else:
+    elif args.command == "locking":
         from runner.locking import experiment
         experiment(args.scenario)
+    else:
+        from runner.score_updates import experiment
+        experiment(args.requests_per_user)
 except (psycopg.Error, ValueError, OSError, RuntimeError, subprocess.TimeoutExpired) as exc:
     print(json.dumps({"status": "failed", "error": str(exc),
                       "sqlstate": getattr(exc, "sqlstate", None)}, ensure_ascii=False))
