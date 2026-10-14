@@ -1,0 +1,77 @@
+{
+  "workers": 4,
+  "database": "duplicate_5175504a137044ada2d935a5d7fc606b",
+  "status": "passed",
+  "purpose": "같은 정산의 중복 실행",
+  "folder": "results/duplicate-4-5175504a137044ada2d935a5d7fc606b",
+  "lock_observation": [
+    [
+      26899,
+      "duplicate-worker-2",
+      "Lock",
+      "transactionid",
+      [
+        26898
+      ]
+    ],
+    [
+      26900,
+      "duplicate-worker-4",
+      "Lock",
+      "transactionid",
+      [
+        26899
+      ]
+    ],
+    [
+      26901,
+      "duplicate-worker-3",
+      "Lock",
+      "tuple",
+      [
+        26900
+      ]
+    ],
+    [
+      26902,
+      "duplicate-worker-1",
+      "Lock",
+      "tuple",
+      [
+        26900,
+        26901
+      ]
+    ]
+  ],
+  "worker_exits": [
+    {
+      "worker": 1,
+      "exit_code": 0
+    },
+    {
+      "worker": 2,
+      "exit_code": 0
+    },
+    {
+      "worker": 3,
+      "exit_code": 0
+    },
+    {
+      "worker": 4,
+      "exit_code": 0
+    }
+  ],
+  "processed_chunks": 10,
+  "skipped_chunks": 30,
+  "verification": {
+    "status": "passed",
+    "guilds": 100,
+    "events": 10000,
+    "chunks": 10,
+    "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+    "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+    "data_hash": "5fbcb9227139db901cb275a0ade38b820e283f0bd647274d7c24c3162a5c8472"
+  },
+  "rerun_unchanged": true,
+  "retries": 0
+}

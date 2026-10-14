@@ -12,7 +12,7 @@ import psycopg
 
 TABLES = ("guild", "settlement_job", "score_event", "settlement_result",
           "guild_wallet", "settlement_chunk")
-EXPECTED = Path("results/job-1/expected.json")
+EXPECTED = Path(os.environ.get("RESULTS_DIR", "results/job-1")) / "expected.json"
 
 
 def digest(rows):
@@ -20,7 +20,7 @@ def digest(rows):
 
 
 def save_report(command, report):
-    folder = Path("results/job-1")
+    folder = EXPECTED.parent
     folder.mkdir(parents=True, exist_ok=True)
     path = folder / f"{command}-{uuid4().hex}.json"
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -112,7 +112,8 @@ def settle_chunk(conn, chunk_no):
 def settle():
     start = time.perf_counter()
     processed = skipped = retries = 0
-    with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True) as conn:
+    with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True,
+                         application_name=os.environ.get("WORKER_NAME", "settlement-worker")) as conn:
         job = conn.execute("SELECT state FROM settlement_job WHERE job_id=1").fetchone()
         if job is None or job[0] not in ("READY", "COMPLETED"):
             raise ValueError("먼저 데이터를 준비해야 합니다.")

@@ -1,0 +1,143 @@
+{
+  "workers": 8,
+  "database": "duplicate_f31c835443eb47e79874da6dc854bd1f",
+  "status": "passed",
+  "purpose": "같은 정산의 중복 실행",
+  "folder": "results/duplicate-8-f31c835443eb47e79874da6dc854bd1f",
+  "lock_observation": [
+    [
+      26929,
+      "duplicate-worker-3",
+      "Lock",
+      "tuple",
+      [
+        26928
+      ]
+    ],
+    [
+      26930,
+      "duplicate-worker-6",
+      "Lock",
+      "tuple",
+      [
+        26928,
+        26929
+      ]
+    ],
+    [
+      26931,
+      "duplicate-worker-1",
+      "Lock",
+      "tuple",
+      [
+        26928,
+        26929,
+        26930,
+        26932,
+        26933
+      ]
+    ],
+    [
+      26927,
+      "duplicate-worker-4",
+      "Lock",
+      "transactionid",
+      [
+        26926
+      ]
+    ],
+    [
+      26928,
+      "duplicate-worker-5",
+      "Lock",
+      "transactionid",
+      [
+        26927
+      ]
+    ],
+    [
+      26933,
+      "duplicate-worker-7",
+      "Lock",
+      "tuple",
+      [
+        26928,
+        26929,
+        26930,
+        26932
+      ]
+    ],
+    [
+      26934,
+      "duplicate-worker-2",
+      "Lock",
+      "tuple",
+      [
+        26928,
+        26929,
+        26930,
+        26932,
+        26933,
+        26931
+      ]
+    ],
+    [
+      26932,
+      "duplicate-worker-8",
+      "Lock",
+      "tuple",
+      [
+        26928,
+        26929,
+        26930
+      ]
+    ]
+  ],
+  "worker_exits": [
+    {
+      "worker": 1,
+      "exit_code": 0
+    },
+    {
+      "worker": 2,
+      "exit_code": 0
+    },
+    {
+      "worker": 3,
+      "exit_code": 0
+    },
+    {
+      "worker": 4,
+      "exit_code": 0
+    },
+    {
+      "worker": 5,
+      "exit_code": 0
+    },
+    {
+      "worker": 6,
+      "exit_code": 0
+    },
+    {
+      "worker": 7,
+      "exit_code": 0
+    },
+    {
+      "worker": 8,
+      "exit_code": 0
+    }
+  ],
+  "processed_chunks": 10,
+  "skipped_chunks": 70,
+  "verification": {
+    "status": "passed",
+    "guilds": 100,
+    "events": 10000,
+    "chunks": 10,
+    "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+    "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+    "data_hash": "3e17f9a87fc50dbea033699de2d5faac4fdd94f72143885bd6055c3c96b14b98"
+  },
+  "rerun_unchanged": true,
+  "retries": 0
+}

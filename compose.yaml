@@ -44,6 +44,7 @@ services:
       TZ: UTC
     volumes:
       - ./runner:/app/runner:ro
+      - ./sql:/app/sql:ro
       - ./results:/app/results
     depends_on:
       db:
