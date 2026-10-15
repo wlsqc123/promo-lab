@@ -1,0 +1,204 @@
+[
+  {
+    "scenario": "timeout",
+    "status": "passed",
+    "database": "locking_aea1d31a26324c5a990dc36078e3288b",
+    "folder": "results/locking-timeout-aea1d31a26324c5a990dc36078e3288b",
+    "lock_observation": [
+      609,
+      "Lock",
+      "transactionid",
+      [
+        607
+      ]
+    ],
+    "first_retry": {
+      "chunk": 1,
+      "retry": 1,
+      "sqlstate": "55P03"
+    },
+    "rollback_after_timeout": true,
+    "worker_exit": 0,
+    "settlement": {
+      "processed_chunks": 10,
+      "skipped_chunks": 0,
+      "retries": 1,
+      "retry_events": [
+        {
+          "chunk": 1,
+          "retry": 1,
+          "sqlstate": "55P03"
+        }
+      ],
+      "elapsed_seconds": 2.1819532050000134
+    },
+    "verification": {
+      "status": "passed",
+      "guilds": 100,
+      "events": 10000,
+      "chunks": 10,
+      "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+      "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+      "data_hash": "5abd45339ae1e16bffd475d2ed1c16a94c7643cda1274a4b87da2d762daa56b1"
+    },
+    "rerun_unchanged": true,
+    "lock_timeout": "2s",
+    "worker_deadlock_timeout": "200ms"
+  },
+  {
+    "scenario": "deadlock",
+    "status": "passed",
+    "database": "locking_d2d3683591ec4966841617fc2a7ee1b0",
+    "folder": "results/locking-deadlock-d2d3683591ec4966841617fc2a7ee1b0",
+    "lock_observation": [
+      644,
+      "Lock",
+      "transactionid",
+      [
+        642
+      ]
+    ],
+    "first_retry": {
+      "chunk": 1,
+      "retry": 1,
+      "sqlstate": "40P01"
+    },
+    "rollback_after_deadlock": true,
+    "worker_exit": 0,
+    "settlement": {
+      "processed_chunks": 10,
+      "skipped_chunks": 0,
+      "retries": 1,
+      "retry_events": [
+        {
+          "chunk": 1,
+          "retry": 1,
+          "sqlstate": "40P01"
+        }
+      ],
+      "elapsed_seconds": 1.1833819309999853
+    },
+    "verification": {
+      "status": "passed",
+      "guilds": 100,
+      "events": 10000,
+      "chunks": 10,
+      "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+      "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+      "data_hash": "c1c38ce81c81eb3995b4360d31b40c7c4f12875ab6d05ded2b6345509a3dbf42"
+    },
+    "rerun_unchanged": true,
+    "lock_timeout": "2s",
+    "worker_deadlock_timeout": "1s"
+  },
+  {
+    "workers": 2,
+    "database": "duplicate_90be7070cc18413e8be5e687a3e71194",
+    "status": "passed",
+    "purpose": "같은 정산의 중복 실행",
+    "folder": "results/duplicate-2-90be7070cc18413e8be5e687a3e71194",
+    "lock_observation": [
+      [
+        676,
+        "duplicate-worker-2",
+        "Lock",
+        "transactionid",
+        [
+          667
+        ]
+      ],
+      [
+        677,
+        "duplicate-worker-1",
+        "Lock",
+        "transactionid",
+        [
+          676
+        ]
+      ]
+    ],
+    "worker_exits": [
+      {
+        "worker": 1,
+        "exit_code": 0
+      },
+      {
+        "worker": 2,
+        "exit_code": 0
+      }
+    ],
+    "processed_chunks": 10,
+    "skipped_chunks": 10,
+    "verification": {
+      "status": "passed",
+      "guilds": 100,
+      "events": 10000,
+      "chunks": 10,
+      "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+      "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+      "data_hash": "ecacb2d0f15636cdafe00c001ec2b9394709e151350e3983cecfcad89317d90f"
+    },
+    "rerun_unchanged": true,
+    "retries": 0
+  },
+  {
+    "point": "before-commit",
+    "status": "passed",
+    "database": "termination_7a563a02b33e4b479dcee1e2f48634e7",
+    "folder": "results/termination-before-commit-7a563a02b33e4b479dcee1e2f48634e7",
+    "paused_session": [
+      "idle in transaction",
+      true
+    ],
+    "worker_exit": -9,
+    "results_after_termination": 0,
+    "completed_chunks_after_termination": 0,
+    "recovery": {
+      "processed_chunks": 10,
+      "skipped_chunks": 0,
+      "retries": 0,
+      "retry_events": [],
+      "elapsed_seconds": 0.07919994899998528
+    },
+    "verification": {
+      "status": "passed",
+      "guilds": 100,
+      "events": 10000,
+      "chunks": 10,
+      "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+      "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+      "data_hash": "caacc66cfec033472be1cd698418362208ec7fe91d1e88ae4a4b42a7cfc51d61"
+    },
+    "rerun_unchanged": true
+  },
+  {
+    "point": "after-commit",
+    "status": "passed",
+    "database": "termination_735711d8f88d4d508f35b1e2ddd760a0",
+    "folder": "results/termination-after-commit-735711d8f88d4d508f35b1e2ddd760a0",
+    "paused_session": [
+      "idle",
+      false
+    ],
+    "worker_exit": -9,
+    "results_after_termination": 10,
+    "completed_chunks_after_termination": 1,
+    "recovery": {
+      "processed_chunks": 9,
+      "skipped_chunks": 1,
+      "retries": 0,
+      "retry_events": [],
+      "elapsed_seconds": 0.07434774499998298
+    },
+    "verification": {
+      "status": "passed",
+      "guilds": 100,
+      "events": 10000,
+      "chunks": 10,
+      "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+      "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+      "data_hash": "ad983fb4f084eef1a2f3fa71cec655d62026183d981ead5a12073fffd92cfd83"
+    },
+    "rerun_unchanged": true
+  }
+]

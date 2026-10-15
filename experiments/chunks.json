@@ -1,0 +1,590 @@
+{
+  "status": "passed",
+  "folder": "results/chunks-1d6c2e3bb3a342c5a20e65d6da738d26",
+  "guilds": 100000,
+  "events": 1000000,
+  "sizes": [
+    10,
+    100,
+    1000,
+    10000
+  ],
+  "seed": 42,
+  "warmups_per_size": 1,
+  "repetitions": 5,
+  "runs": [
+    {
+      "size": 10,
+      "repetition": 0,
+      "chunks": 10000,
+      "elapsed_seconds": 52.628302357999985,
+      "guilds_per_second": 1900.1182922405073,
+      "p50_ms": 5.150818999993589,
+      "p95_ms": 6.325422999992725,
+      "p99_ms": 7.671219999991763,
+      "probe_wait_ms": 7.375615999990259,
+      "lock_samples": 2532,
+      "samples_with_waits": 0,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "8ff6b41787ff6fb172cfdce034f4baf8a00de92c862e605b6eba8db84b322443"
+      }
+    },
+    {
+      "size": 100,
+      "repetition": 0,
+      "chunks": 1000,
+      "elapsed_seconds": 18.04661293700002,
+      "guilds_per_second": 5541.206006306882,
+      "p50_ms": 17.399576000002526,
+      "p95_ms": 23.615911000035794,
+      "p99_ms": 45.80419299998084,
+      "probe_wait_ms": 16.97703900003944,
+      "lock_samples": 795,
+      "samples_with_waits": 1,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 1000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "b935f2fe066ea19152d51120c39c685a4e89ae465a21e20ff30abda14db6408c"
+      }
+    },
+    {
+      "size": 1000,
+      "repetition": 0,
+      "chunks": 100,
+      "elapsed_seconds": 16.02656362500005,
+      "guilds_per_second": 6239.640782632196,
+      "p50_ms": 155.31665899999325,
+      "p95_ms": 204.35461499999974,
+      "p99_ms": 236.85790600001155,
+      "probe_wait_ms": 206.4275779999889,
+      "lock_samples": 660,
+      "samples_with_waits": 6,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 100,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "b0fd411ec03a5bb558d2b4895d6ed9857d8753f0063fdecf113435413a2d006d"
+      }
+    },
+    {
+      "size": 10000,
+      "repetition": 0,
+      "chunks": 10,
+      "elapsed_seconds": 16.28288676599999,
+      "guilds_per_second": 6141.417147775555,
+      "p50_ms": 1605.1313899999968,
+      "p95_ms": 1861.1927669999773,
+      "p99_ms": 1861.1927669999773,
+      "probe_wait_ms": 1556.7017740000324,
+      "lock_samples": 611,
+      "samples_with_waits": 60,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "6617e9e4ee1e4ae756e0112813f0e8ebe959bee201350ee31b997d2581720a44"
+      }
+    },
+    {
+      "size": 10,
+      "repetition": 1,
+      "chunks": 10000,
+      "elapsed_seconds": 51.39567179599999,
+      "guilds_per_second": 1945.6891311182897,
+      "p50_ms": 5.00352900002099,
+      "p95_ms": 6.282712999961859,
+      "p99_ms": 8.625429000005624,
+      "probe_wait_ms": 6.952979000004689,
+      "lock_samples": 2478,
+      "samples_with_waits": 0,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "60f46ede735a4bd9fdfd29c73795bc2fda37e1b9e373b873b01e8925e9ca8f4d"
+      }
+    },
+    {
+      "size": 10000,
+      "repetition": 1,
+      "chunks": 10,
+      "elapsed_seconds": 16.298785216000056,
+      "guilds_per_second": 6135.426577793836,
+      "p50_ms": 1588.0260469999712,
+      "p95_ms": 1805.9186520000026,
+      "p99_ms": 1805.9186520000026,
+      "probe_wait_ms": 1549.6934220000185,
+      "lock_samples": 613,
+      "samples_with_waits": 58,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "d1b272d8572d8f4ce8bd2ec7150816620af51320e3d76126570df82cf703e998"
+      }
+    },
+    {
+      "size": 1000,
+      "repetition": 1,
+      "chunks": 100,
+      "elapsed_seconds": 15.673151754999992,
+      "guilds_per_second": 6380.337634904758,
+      "p50_ms": 150.756231999992,
+      "p95_ms": 191.06206599997222,
+      "p99_ms": 211.47004800002378,
+      "probe_wait_ms": 137.0411309999895,
+      "lock_samples": 648,
+      "samples_with_waits": 5,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 100,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "d8a31825f5b5a5278d5f0317668412ad051d2fdbeba55c2e2d7a1048fdfabefb"
+      }
+    },
+    {
+      "size": 100,
+      "repetition": 1,
+      "chunks": 1000,
+      "elapsed_seconds": 18.18045050500001,
+      "guilds_per_second": 5500.4137533609455,
+      "p50_ms": 17.6763370000117,
+      "p95_ms": 22.852215999989767,
+      "p99_ms": 43.76817300004632,
+      "probe_wait_ms": 18.090444999984356,
+      "lock_samples": 805,
+      "samples_with_waits": 1,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 1000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "204ad703305d6fa5d5a7b7147133211da5ae20bf4ae5f0dc8a98170551aed371"
+      }
+    },
+    {
+      "size": 1000,
+      "repetition": 2,
+      "chunks": 100,
+      "elapsed_seconds": 14.780907366000008,
+      "guilds_per_second": 6765.484521608357,
+      "p50_ms": 142.02624900002547,
+      "p95_ms": 188.91680100000485,
+      "p99_ms": 206.8280160000313,
+      "probe_wait_ms": 189.30612199994812,
+      "lock_samples": 620,
+      "samples_with_waits": 7,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 100,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "cdf043c0fb6cb62dcf9fc31aed97578626184813cb06d9c52d47fbc3757595d2"
+      }
+    },
+    {
+      "size": 10000,
+      "repetition": 2,
+      "chunks": 10,
+      "elapsed_seconds": 16.068007205000015,
+      "guilds_per_second": 6223.547122189625,
+      "p50_ms": 1598.71437999999,
+      "p95_ms": 1773.106452000036,
+      "p99_ms": 1773.106452000036,
+      "probe_wait_ms": 1410.2562949999538,
+      "lock_samples": 606,
+      "samples_with_waits": 54,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "738eb1b36db098ee079df528f0f945123c8509a6effa9c34aa0da714063e828f"
+      }
+    },
+    {
+      "size": 10,
+      "repetition": 2,
+      "chunks": 10000,
+      "elapsed_seconds": 52.71428668499999,
+      "guilds_per_second": 1897.0189352567925,
+      "p50_ms": 5.14706199999182,
+      "p95_ms": 6.311756999991758,
+      "p99_ms": 7.8377909999858275,
+      "probe_wait_ms": 7.232138999995641,
+      "lock_samples": 2540,
+      "samples_with_waits": 0,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "e68464bd1cd8e737fc4092ce5ffb4546b9be074e31825d56281ba1513ae3275a"
+      }
+    },
+    {
+      "size": 100,
+      "repetition": 2,
+      "chunks": 1000,
+      "elapsed_seconds": 17.641822082999965,
+      "guilds_per_second": 5668.3487413900475,
+      "p50_ms": 16.994389000046795,
+      "p95_ms": 22.54036299996187,
+      "p99_ms": 42.64649800006737,
+      "probe_wait_ms": 19.585861999985354,
+      "lock_samples": 781,
+      "samples_with_waits": 1,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 1000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "de92b641ffe31c22ec720985f550f1b8ed2167eddaef9948bc6d47a96ae0ec7c"
+      }
+    },
+    {
+      "size": 1000,
+      "repetition": 3,
+      "chunks": 100,
+      "elapsed_seconds": 15.160305257999994,
+      "guilds_per_second": 6596.17324969302,
+      "p50_ms": 146.29125199996906,
+      "p95_ms": 199.05355299999883,
+      "p99_ms": 208.5822989999997,
+      "probe_wait_ms": 138.15683899997566,
+      "lock_samples": 636,
+      "samples_with_waits": 6,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 100,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "12ba4e6156d23278c50f62dde89c8011dfd5db4c2dc56772d10f9834451cf175"
+      }
+    },
+    {
+      "size": 100,
+      "repetition": 3,
+      "chunks": 1000,
+      "elapsed_seconds": 17.515345249000006,
+      "guilds_per_second": 5709.279410619054,
+      "p50_ms": 17.003090000002885,
+      "p95_ms": 21.79282700001295,
+      "p99_ms": 43.59460000000581,
+      "probe_wait_ms": 16.79388000002291,
+      "lock_samples": 783,
+      "samples_with_waits": 1,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 1000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "29d9ea67d126f0ba5ad2f8370050e018b854b448c1520a305deb2835d181fab9"
+      }
+    },
+    {
+      "size": 10,
+      "repetition": 3,
+      "chunks": 10000,
+      "elapsed_seconds": 51.13073352599997,
+      "guilds_per_second": 1955.7708858049143,
+      "p50_ms": 5.019878999974026,
+      "p95_ms": 6.262290999984543,
+      "p99_ms": 7.365420000041922,
+      "probe_wait_ms": 7.753466999929515,
+      "lock_samples": 2464,
+      "samples_with_waits": 0,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "69638fbb60e154874d71755ecf4180512b4652cba21ef561652be032fd48678d"
+      }
+    },
+    {
+      "size": 10000,
+      "repetition": 3,
+      "chunks": 10,
+      "elapsed_seconds": 15.233736675000046,
+      "guilds_per_second": 6564.37761354436,
+      "p50_ms": 1468.6359150000499,
+      "p95_ms": 1738.0312589999676,
+      "p99_ms": 1738.0312589999676,
+      "probe_wait_ms": 1444.6511280000323,
+      "lock_samples": 585,
+      "samples_with_waits": 56,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "0b617292b6dc632104da7f0d50a806b9517f365007f9283a63557de645d6bbdb"
+      }
+    },
+    {
+      "size": 10,
+      "repetition": 4,
+      "chunks": 10000,
+      "elapsed_seconds": 51.66393369100001,
+      "guilds_per_second": 1935.5862563252758,
+      "p50_ms": 5.079879000049914,
+      "p95_ms": 6.228977000091618,
+      "p99_ms": 7.105613000021549,
+      "probe_wait_ms": 5.988516000002164,
+      "lock_samples": 2489,
+      "samples_with_waits": 0,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "4569a13ee757c01ab4d7a4fddaea9bb63882d9a7a3907c220db7c95df044690e"
+      }
+    },
+    {
+      "size": 100,
+      "repetition": 4,
+      "chunks": 1000,
+      "elapsed_seconds": 16.540219551000064,
+      "guilds_per_second": 6045.868961512892,
+      "p50_ms": 15.651469999966139,
+      "p95_ms": 21.96129900005417,
+      "p99_ms": 31.594456999982867,
+      "probe_wait_ms": 21.233138999946277,
+      "lock_samples": 744,
+      "samples_with_waits": 1,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 1000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "c3b5bf2a108d776f717899a84fd2c2cb4348e79ea157c8a838a32475cc5c51f3"
+      }
+    },
+    {
+      "size": 1000,
+      "repetition": 4,
+      "chunks": 100,
+      "elapsed_seconds": 12.638518814000008,
+      "guilds_per_second": 7912.3195899528555,
+      "p50_ms": 121.95907699992858,
+      "p95_ms": 161.41882499994153,
+      "p99_ms": 178.98769199996423,
+      "probe_wait_ms": 175.34883300004367,
+      "lock_samples": 550,
+      "samples_with_waits": 7,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 100,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "690c490efe4173596df2e2d1058afc9bfac7f29deeb96a55a26fa3cadddfa840"
+      }
+    },
+    {
+      "size": 10000,
+      "repetition": 4,
+      "chunks": 10,
+      "elapsed_seconds": 11.700159249999956,
+      "guilds_per_second": 8546.892214308995,
+      "p50_ms": 1171.1393440000393,
+      "p95_ms": 1205.9327549999352,
+      "p99_ms": 1205.9327549999352,
+      "probe_wait_ms": 1107.213856000044,
+      "lock_samples": 479,
+      "samples_with_waits": 46,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "6b473e45d3856977ccc7cc1a55b9ffd32b52d977b50f1b6ee9659685fd20b9ca"
+      }
+    },
+    {
+      "size": 10,
+      "repetition": 5,
+      "chunks": 10000,
+      "elapsed_seconds": 42.43049326300002,
+      "guilds_per_second": 2356.795604052084,
+      "p50_ms": 4.142517999980555,
+      "p95_ms": 4.878668999936053,
+      "p99_ms": 5.93723500003307,
+      "probe_wait_ms": 5.910573000051045,
+      "lock_samples": 2062,
+      "samples_with_waits": 0,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "97e51bfe4794af4347bd26ae3b05955f799a6021969e78804071c5233968ad92"
+      }
+    },
+    {
+      "size": 10000,
+      "repetition": 5,
+      "chunks": 10,
+      "elapsed_seconds": 12.011203731000023,
+      "guilds_per_second": 8325.560221904108,
+      "p50_ms": 1173.2997999999952,
+      "p95_ms": 1435.7368259999248,
+      "p99_ms": 1435.7368259999248,
+      "probe_wait_ms": 1136.4819740000485,
+      "lock_samples": 491,
+      "samples_with_waits": 47,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 10,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "a005e253888fb0f1fe599b366209519cf24ec797ee8acaf314eaf04e77a2b928"
+      }
+    },
+    {
+      "size": 1000,
+      "repetition": 5,
+      "chunks": 100,
+      "elapsed_seconds": 12.20672643599994,
+      "guilds_per_second": 8192.204562320749,
+      "p50_ms": 118.51713900000505,
+      "p95_ms": 143.534241999987,
+      "p99_ms": 160.07700999989538,
+      "probe_wait_ms": 125.94127500005925,
+      "lock_samples": 545,
+      "samples_with_waits": 5,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 100,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "b0bae1486b499da53676f07149828007adaa0ddda1a86064f9c95e100980b2a5"
+      }
+    },
+    {
+      "size": 100,
+      "repetition": 5,
+      "chunks": 1000,
+      "elapsed_seconds": 14.569029552000075,
+      "guilds_per_second": 6863.8751567548115,
+      "p50_ms": 14.080349999971986,
+      "p95_ms": 17.165696000006392,
+      "p99_ms": 32.368078000104106,
+      "probe_wait_ms": 18.11617600003501,
+      "lock_samples": 675,
+      "samples_with_waits": 1,
+      "verification": {
+        "status": "passed",
+        "guilds": 100000,
+        "events": 1000000,
+        "chunks": 1000,
+        "result_hash": "12cfe22992648858b980051c427744e4430851f9d3449c23ece12d1110a3c951",
+        "wallet_hash": "7951c8b7a373f7a8f8d089f45264dfb212d49f6f424d95c510411c72dbdcce97",
+        "data_hash": "0f71860a930e779300821fbd2fe4ddb740f2db627bd415cb1e4a73e802bd9bb8"
+      }
+    }
+  ],
+  "environment": {
+    "postgresql": "PostgreSQL 18.6 (Debian 18.6-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "psycopg": "3.3.6",
+    "index": "(job_id, guild_id) INCLUDE (score)",
+    "db_settings": {
+      "fsync": "on",
+      "shared_buffers": "16384",
+      "synchronous_commit": "on",
+      "work_mem": "4096"
+    }
+  },
+  "medians": {
+    "10": {
+      "elapsed_seconds": 51.39567179599999,
+      "guilds_per_second": 1945.6891311182897,
+      "p50_ms": 5.019878999974026,
+      "p95_ms": 6.262290999984543,
+      "p99_ms": 7.365420000041922,
+      "probe_wait_ms": 6.952979000004689
+    },
+    "100": {
+      "elapsed_seconds": 17.515345249000006,
+      "guilds_per_second": 5709.279410619054,
+      "p50_ms": 16.994389000046795,
+      "p95_ms": 21.96129900005417,
+      "p99_ms": 42.64649800006737,
+      "probe_wait_ms": 18.11617600003501
+    },
+    "1000": {
+      "elapsed_seconds": 14.780907366000008,
+      "guilds_per_second": 6765.484521608357,
+      "p50_ms": 142.02624900002547,
+      "p95_ms": 188.91680100000485,
+      "p99_ms": 206.8280160000313,
+      "probe_wait_ms": 138.15683899997566
+    },
+    "10000": {
+      "elapsed_seconds": 15.233736675000046,
+      "guilds_per_second": 6564.37761354436,
+      "p50_ms": 1468.6359150000499,
+      "p95_ms": 1738.0312589999676,
+      "p99_ms": 1738.0312589999676,
+      "probe_wait_ms": 1410.2562949999538
+    }
+  }
+}

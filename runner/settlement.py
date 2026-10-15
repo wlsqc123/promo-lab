@@ -79,7 +79,7 @@ def prepare(args):
                             "expected": str(EXPECTED)})
 
 
-def settle_chunk(conn, chunk_no):
+def settle_chunk(conn, chunk_no, *, on_first_wallet=None):
     with conn.transaction():
         chunk = conn.execute("SELECT first_guild_id, last_guild_id, completed_at "
                              "FROM settlement_chunk WHERE job_id=1 AND chunk_no=%s "
@@ -96,15 +96,24 @@ def settle_chunk(conn, chunk_no):
                               "ORDER BY guild_id", (first, last)).fetchall()
         if len(guilds) != last - first + 1:
             raise ValueError("청크 안의 대상 길드가 누락됐습니다.")
-        for (guild_id,) in guilds:
-            total = scores.get(guild_id, 0)
-            reward = total // 100
-            conn.execute("INSERT INTO settlement_result VALUES (1, %s, %s, %s, clock_timestamp())",
-                         (guild_id, total, reward))
-            updated = conn.execute("UPDATE guild_wallet SET balance=balance+%s WHERE guild_id=%s",
-                                   (reward, guild_id))
-            if updated.rowcount != 1:
-                raise ValueError("보상을 넣을 지갑이 없습니다.")
+        updates = []
+        # SQL 순서와 트랜잭션 경계는 유지하고, 행마다 응답을 기다리는 비용만 줄임.
+        with conn.pipeline() as pipeline:
+            for (guild_id,) in guilds:
+                total = scores.get(guild_id, 0)
+                reward = total // 100
+                conn.execute("INSERT INTO settlement_result VALUES (1, %s, %s, %s, clock_timestamp())",
+                             (guild_id, total, reward))
+                updated = conn.execute("UPDATE guild_wallet SET balance=balance+%s WHERE guild_id=%s",
+                                       (reward, guild_id))
+                updates.append(updated)
+                if on_first_wallet is not None and guild_id == first:
+                    pipeline.sync()
+                    if updated.rowcount != 1:
+                        raise ValueError("보상을 넣을 지갑이 없습니다.")
+                    on_first_wallet()
+        if any(updated.rowcount != 1 for updated in updates):
+            raise ValueError("보상을 넣을 지갑이 없습니다.")
         conn.execute("UPDATE settlement_chunk SET completed_at=clock_timestamp() "
                      "WHERE job_id=1 AND chunk_no=%s", (chunk_no,))
         pause_for_termination(conn, chunk_no, "before-commit")
