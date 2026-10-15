@@ -1,0 +1,26 @@
+[
+  {
+    "message": "vacuuming \"vacuum_436382aa76f84299b65d1547bd778402.public.score_event_mvcc\"",
+    "detail": null
+  },
+  {
+    "message": "launched 1 parallel vacuum worker for index vacuuming (planned: 1)",
+    "detail": null
+  },
+  {
+    "message": "finished vacuuming \"vacuum_436382aa76f84299b65d1547bd778402.public.score_event_mvcc\": index scans: 1\npages: 0 removed, 2942 remain, 2942 scanned (100.00% of total), 0 eagerly scanned\ntuples: 300000 removed, 100000 remain, 0 are dead but not yet removable\nremovable cutoff: 128036, which was 0 XIDs old when operation ended\nnew relfrozenxid: 128034, which is 4 XIDs ahead of previous value\nfrozen: 0 pages from table (0.00% of total) had 0 tuples frozen\nvisibility map: 2942 pages set all-visible, 2205 pages set all-frozen (0 were all-visible)\nindex scan needed: 2206 pages from table (74.98% of total) had 300000 dead item identifiers removed\nindex \"score_event_mvcc_pkey\": pages: 825 in total, 0 newly deleted, 0 currently deleted, 0 reusable\nindex \"mvcc_job_guild\": pages: 2727 in total, 0 newly deleted, 0 currently deleted, 0 reusable\nI/O timings: read: 0.000 ms, write: 0.000 ms\navg read rate: 0.000 MB/s, avg write rate: 0.000 MB/s\nbuffer usage: 11701 hits, 0 reads, 0 dirtied\nWAL usage: 10886 records, 0 full page images, 3134976 bytes, 0 buffers full\nsystem usage: CPU: user: 0.03 s, system: 0.00 s, elapsed: 0.03 s",
+    "detail": null
+  },
+  {
+    "message": "analyzing \"public.score_event_mvcc\"",
+    "detail": null
+  },
+  {
+    "message": "\"score_event_mvcc\": scanned 2942 of 2942 pages, containing 100000 live rows and 0 dead rows; 30000 rows in sample, 100000 estimated total rows",
+    "detail": null
+  },
+  {
+    "message": "finished analyzing table \"vacuum_436382aa76f84299b65d1547bd778402.public.score_event_mvcc\"\nI/O timings: read: 0.000 ms, write: 0.000 ms\navg read rate: 0.000 MB/s, avg write rate: 0.000 MB/s\nbuffer usage: 2974 hits, 0 reads, 0 dirtied\nWAL usage: 5 records, 0 full page images, 3111 bytes, 0 buffers full\nsystem usage: CPU: user: 0.01 s, system: 0.00 s, elapsed: 0.02 s",
+    "detail": null
+  }
+]

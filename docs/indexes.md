@@ -47,3 +47,5 @@ EXPLAIN 계측은 조회시간 측정과 분리했습니다. 루트 노드의 sh
 기록: [결과 JSON](../experiments/indexes.json) · [측정 CSV](../experiments/indexes-measurements.csv) · [PK 실행계획](../experiments/indexes-baseline-plan.json) · [복합 실행계획](../experiments/indexes-composite-plan.json) · [커버링 실행계획](../experiments/indexes-covering-plan.json)
 
 집계 SQL은 [aggregate_scores.sql](../sql/aggregate_scores.sql), PC·컨테이너 사양은 [환경 기록](../experiments/score-updates-host.json)에 있습니다. 입력 CSV와 예상값은 results/indexes-* 폴더에 남깁니다.
+
+갱신이 있는 조건은 [긴 스냅샷과 VACUUM 실험](vacuum.md)에서 추가로 확인했습니다. 같은 Index Only Scan에서도 Heap Fetches가 달랐습니다.

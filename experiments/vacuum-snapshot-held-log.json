@@ -1,0 +1,26 @@
+[
+  {
+    "message": "vacuuming \"vacuum_436382aa76f84299b65d1547bd778402.public.score_event_mvcc\"",
+    "detail": null
+  },
+  {
+    "message": "launched 1 parallel vacuum worker for index cleanup (planned: 1)",
+    "detail": null
+  },
+  {
+    "message": "finished vacuuming \"vacuum_436382aa76f84299b65d1547bd778402.public.score_event_mvcc\": index scans: 0\npages: 0 removed, 2942 remain, 2942 scanned (100.00% of total), 0 eagerly scanned\ntuples: 0 removed, 400000 remain, 300000 are dead but not yet removable\nremovable cutoff: 128032, which was 3 XIDs old when operation ended\nfrozen: 0 pages from table (0.00% of total) had 0 tuples frozen\nvisibility map: 0 pages set all-visible, 0 pages set all-frozen (0 were all-visible)\nindex scan not needed: 0 pages from table (0.00% of total) had 0 dead item identifiers removed\nI/O timings: read: 0.000 ms, write: 0.000 ms\navg read rate: 0.000 MB/s, avg write rate: 0.000 MB/s\nbuffer usage: 5918 hits, 0 reads, 0 dirtied\nWAL usage: 1 records, 0 full page images, 360 bytes, 0 buffers full\nsystem usage: CPU: user: 0.01 s, system: 0.00 s, elapsed: 0.02 s",
+    "detail": null
+  },
+  {
+    "message": "analyzing \"public.score_event_mvcc\"",
+    "detail": null
+  },
+  {
+    "message": "\"score_event_mvcc\": scanned 2942 of 2942 pages, containing 100000 live rows and 300000 dead rows; 30000 rows in sample, 100000 estimated total rows",
+    "detail": null
+  },
+  {
+    "message": "finished analyzing table \"vacuum_436382aa76f84299b65d1547bd778402.public.score_event_mvcc\"\nI/O timings: read: 0.000 ms, write: 0.000 ms\navg read rate: 0.000 MB/s, avg write rate: 0.000 MB/s\nbuffer usage: 2980 hits, 0 reads, 0 dirtied\nWAL usage: 6 records, 0 full page images, 3636 bytes, 0 buffers full\nsystem usage: CPU: user: 0.02 s, system: 0.00 s, elapsed: 0.02 s",
+    "detail": null
+  }
+]

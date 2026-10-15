@@ -66,7 +66,11 @@ indexes.add_argument("--events", type=int, default=1000000)
 chunks = commands.add_parser("chunks", help="청크 크기별 정산 비용과 잠금 대기 비교")
 chunks.add_argument("--guilds", type=int, default=100000)
 chunks.add_argument("--events", type=int, default=1000000)
+vacuum = commands.add_parser("vacuum", help="긴 스냅샷과 VACUUM·Heap Fetches 비교")
+vacuum.add_argument("--rows", type=int, default=100000)
 args = parser.parse_args()
+if args.command == "vacuum" and not 10000 <= args.rows <= 1000000:
+    parser.error("행 수는 10000~1000000을 사용하세요.")
 if args.command == "chunks" and not (10000 <= args.guilds <= 1000000 and 0 <= args.events <= 10000000):
     parser.error("길드 10000~1000000, 이벤트 0~10000000을 사용하세요.")
 if args.command == "indexes" and not 1000 <= args.events <= 10000000:
@@ -101,9 +105,12 @@ try:
     elif args.command == "indexes":
         from runner.indexes import experiment
         experiment(args.events)
-    else:
+    elif args.command == "chunks":
         from runner.chunks import experiment
         experiment(args.guilds, args.events)
+    else:
+        from runner.vacuum import experiment
+        experiment(args.rows)
 except (psycopg.Error, ValueError, OSError, RuntimeError, subprocess.TimeoutExpired) as exc:
     print(json.dumps({"status": "failed", "error": str(exc),
                       "sqlstate": getattr(exc, "sqlstate", None)}, ensure_ascii=False))

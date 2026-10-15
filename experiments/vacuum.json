@@ -1,0 +1,135 @@
+{
+  "status": "passed",
+  "folder": "results/vacuum-436382aa76f84299b65d1547bd778402",
+  "rows": 100000,
+  "update_rounds": 3,
+  "stages": [
+    {
+      "stage": "initial",
+      "actual_row_count": 100000,
+      "n_live_tup_estimate": 100000,
+      "n_dead_tup_estimate": 0,
+      "vacuum_count": 1,
+      "autovacuum_count": 0,
+      "last_vacuum": "2026-10-15 05:29:52.554645+00:00",
+      "last_autovacuum": null,
+      "heap_bytes": 6291456,
+      "index_bytes": 7962624,
+      "total_bytes": 14286848,
+      "relpages": 768,
+      "relallvisible": 736,
+      "scans": [
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "mvcc_job_guild",
+          "Actual Rows": 100.0,
+          "Actual Loops": 1,
+          "Plan Rows": 99,
+          "Heap Fetches": 0
+        }
+      ],
+      "heap_fetches": 0,
+      "explain_execution_ms": 0.039,
+      "verification": "passed"
+    },
+    {
+      "stage": "updated_snapshot_held",
+      "actual_row_count": 100000,
+      "n_live_tup_estimate": 200000,
+      "n_dead_tup_estimate": 300000,
+      "vacuum_count": 1,
+      "autovacuum_count": 0,
+      "last_vacuum": "2026-10-15 05:29:52.554645+00:00",
+      "last_autovacuum": null,
+      "heap_bytes": 24100864,
+      "index_bytes": 29097984,
+      "total_bytes": 53231616,
+      "relpages": 768,
+      "relallvisible": 736,
+      "scans": [
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "mvcc_job_guild",
+          "Actual Rows": 100.0,
+          "Actual Loops": 1,
+          "Plan Rows": 379,
+          "Heap Fetches": 400
+        }
+      ],
+      "heap_fetches": 400,
+      "explain_execution_ms": 0.093,
+      "verification": "passed"
+    },
+    {
+      "stage": "vacuum_snapshot_held",
+      "actual_row_count": 100000,
+      "n_live_tup_estimate": 100000,
+      "n_dead_tup_estimate": 300000,
+      "vacuum_count": 2,
+      "autovacuum_count": 0,
+      "last_vacuum": "2026-10-15 05:29:54.223397+00:00",
+      "last_autovacuum": null,
+      "heap_bytes": 24100864,
+      "index_bytes": 29097984,
+      "total_bytes": 53231616,
+      "relpages": 2942,
+      "relallvisible": 0,
+      "scans": [
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "mvcc_job_guild",
+          "Actual Rows": 100.0,
+          "Actual Loops": 1,
+          "Plan Rows": 89,
+          "Heap Fetches": 400
+        }
+      ],
+      "heap_fetches": 400,
+      "explain_execution_ms": 0.093,
+      "verification": "passed"
+    },
+    {
+      "stage": "vacuum_snapshot_released",
+      "actual_row_count": 100000,
+      "n_live_tup_estimate": 100000,
+      "n_dead_tup_estimate": 0,
+      "vacuum_count": 3,
+      "autovacuum_count": 0,
+      "last_vacuum": "2026-10-15 05:29:54.317677+00:00",
+      "last_autovacuum": null,
+      "heap_bytes": 24100864,
+      "index_bytes": 29097984,
+      "total_bytes": 53231616,
+      "relpages": 2942,
+      "relallvisible": 2942,
+      "scans": [
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "mvcc_job_guild",
+          "Actual Rows": 100.0,
+          "Actual Loops": 1,
+          "Plan Rows": 89,
+          "Heap Fetches": 0
+        }
+      ],
+      "heap_fetches": 0,
+      "explain_execution_ms": 0.032,
+      "verification": "passed"
+    }
+  ],
+  "environment": {
+    "postgresql": "PostgreSQL 18.6 (Debian 18.6-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "psycopg": "3.3.6",
+    "autovacuum_global": "on",
+    "table_autovacuum_disabled_during_experiment": true
+  },
+  "snapshot": "128032:128032:",
+  "reader_activity": [
+    "idle in transaction",
+    "128032",
+    "2026-10-15 05:29:52.605539+00:00"
+  ],
+  "restored_reloptions": null,
+  "snapshot_unchanged": true,
+  "all_rows_verified": true
+}

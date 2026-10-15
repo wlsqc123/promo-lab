@@ -172,3 +172,12 @@ docker compose run --rm --build runner chunks
 ```
 
 `--guilds`와 `--events`로 규모를 바꿀 수 있습니다. 각 크기에서 워밍업 1회·측정 5회, 총 24회를 실행합니다. 준비·초기화·결과 비교를 제외한 전체 처리시간과 청크별 지연을 기록합니다. 기존 DB는 유지하고 결과는 `results/chunks-*`에 남깁니다. [처리시간과 잠금 대기 비교](docs/chunks.md)를 정리했습니다.
+## 긴 스냅샷과 VACUUM
+
+읽기 트랜잭션이 이전 스냅샷을 유지하는 동안 점수를 갱신하고, 트랜잭션 종료 전후의 VACUUM 결과를 비교합니다.
+
+```powershell
+docker compose run --rm --build runner vacuum
+```
+
+기본값은 이벤트 10만 건이며 `--rows`로 바꿀 수 있습니다. 별도 DB를 사용하고 결과는 `results/vacuum-*`에 남깁니다. [이전 행 버전과 Heap Fetches 관측](docs/vacuum.md)을 정리했습니다.
