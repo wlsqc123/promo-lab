@@ -14,8 +14,8 @@
 ; Selected TOC Entries:
 ;
 3462; 0 0 ACL - SCHEMA public pg_database_owner
-2; 3079 16385 EXTENSION - pg_stat_statements 
-3463; 0 0 COMMENT - EXTENSION pg_stat_statements 
+2; 3079 16385 EXTENSION - pg_stat_statements
+3463; 0 0 COMMENT - EXTENSION pg_stat_statements
 228; 1259 16441 TABLE public guild lab_admin
 3464; 0 0 ACL public TABLE guild lab_admin
 232; 1259 16516 TABLE public guild_wallet lab_admin
