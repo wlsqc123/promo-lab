@@ -182,6 +182,16 @@ docker compose run --rm --build runner score-batching
 
 기본값은 유저당 50회이며 `--requests-per-user`로 바꿀 수 있습니다. 방식별 워밍업 1회·측정 5회를 별도 DB에서 실행합니다. 요청 응답과 길드 점수 반영까지의 지연을 구분하며, 기록은 `results/score-batching-*`에 남깁니다. [비교 결과와 적용 조건](docs/score-batching.md)을 정리했습니다.
 
+## 백업·복원 확인
+
+정산이 완료된 settlement_lab를 백업 파일로 저장한 뒤 별도 DB에 복원합니다. 데이터·정의·권한을 비교하고, 정산을 다시 실행해 중복 지급이 없는지 확인합니다. 기존 정산 완료 데이터와 `results/job-1/expected.json`이 필요합니다.
+
+```powershell
+.\scripts\backup-restore.ps1
+```
+
+DB와 runner 이미지가 준비된 상태에서 실행합니다. 백업 파일과 로그는 `results/backup-*`에 남기고 실험에서 만든 복원 DB만 제거합니다. [실행 결과와 복원 범위](docs/backup-restore.md)를 정리했습니다.
+
 ## 긴 스냅샷과 VACUUM
 
 읽기 트랜잭션이 이전 스냅샷을 유지하는 동안 점수를 갱신하고, 트랜잭션 종료 전후의 VACUUM 결과를 비교합니다.

@@ -1,0 +1,47 @@
+;
+; Archive created at 2026-10-16 06:25:53 UTC
+;     dbname: settlement_lab
+;     TOC Entries: 37
+;     Compression: gzip
+;     Dump Version: 1.16-0
+;     Format: CUSTOM
+;     Integer: 4 bytes
+;     Offset: 8 bytes
+;     Dumped from database version: 18.6 (Debian 18.6-1.pgdg12+2)
+;     Dumped by pg_dump version: 18.6 (Debian 18.6-1.pgdg12+2)
+;
+;
+; Selected TOC Entries:
+;
+3462; 0 0 ACL - SCHEMA public pg_database_owner
+2; 3079 16385 EXTENSION - pg_stat_statements 
+3463; 0 0 COMMENT - EXTENSION pg_stat_statements 
+228; 1259 16441 TABLE public guild lab_admin
+3464; 0 0 ACL public TABLE guild lab_admin
+232; 1259 16516 TABLE public guild_wallet lab_admin
+3465; 0 0 ACL public TABLE guild_wallet lab_admin
+3466; 0 0 ACL public COLUMN guild_wallet.balance lab_admin
+230; 1259 16472 TABLE public score_event lab_admin
+3467; 0 0 ACL public TABLE score_event lab_admin
+233; 1259 16530 TABLE public settlement_chunk lab_admin
+3468; 0 0 ACL public TABLE settlement_chunk lab_admin
+3469; 0 0 ACL public COLUMN settlement_chunk.completed_at lab_admin
+229; 1259 16452 TABLE public settlement_job lab_admin
+3470; 0 0 ACL public TABLE settlement_job lab_admin
+3471; 0 0 ACL public COLUMN settlement_job.state lab_admin
+3472; 0 0 ACL public COLUMN settlement_job.completed_at lab_admin
+231; 1259 16493 TABLE public settlement_result lab_admin
+3473; 0 0 ACL public TABLE settlement_result lab_admin
+3449; 0 16441 TABLE DATA public guild lab_admin
+3453; 0 16516 TABLE DATA public guild_wallet lab_admin
+3451; 0 16472 TABLE DATA public score_event lab_admin
+3454; 0 16530 TABLE DATA public settlement_chunk lab_admin
+3450; 0 16452 TABLE DATA public settlement_job lab_admin
+3452; 0 16493 TABLE DATA public settlement_result lab_admin
+3287; 2606 16451 CONSTRAINT public guild guild_pkey lab_admin
+3297; 2606 16524 CONSTRAINT public guild_wallet guild_wallet_pkey lab_admin
+3293; 2606 16482 CONSTRAINT public score_event score_event_pkey lab_admin
+3299; 2606 16540 CONSTRAINT public settlement_chunk settlement_chunk_pkey lab_admin
+3289; 2606 16469 CONSTRAINT public settlement_job settlement_job_pkey lab_admin
+3291; 2606 16471 CONSTRAINT public settlement_job settlement_job_season_id_settlement_date_key lab_admin
+3295; 2606 16505 CONSTRAINT public settlement_result settlement_result_pkey lab_admin

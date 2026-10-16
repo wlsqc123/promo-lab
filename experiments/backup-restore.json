@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "folder": "results/backup-4c3976432e2c43da96bcef43c0be79f5",
+  "source": "settlement_lab",
+  "restored": "restore_4c3976432e2c43da96bcef43c0be79f5",
+  "dump_seconds": 0.8568691,
+  "archive_bytes": 69417,
+  "archive_sha256": "19198867ff4eb9d2ff71003ea043bc163cf489f2749c2cc14fd45cef01acd50d",
+  "restore_seconds": 0.7978858,
+  "verification_seconds": 3.0104439,
+  "verification": {
+    "status": "passed",
+    "tables": {
+      "guild": {
+        "rows": 100,
+        "hash": "37046983cd140f8cf54c9c99c7b9a296b977bdab26feef5d214664e4f3024df4"
+      },
+      "settlement_job": {
+        "rows": 1,
+        "hash": "02b7273b7e2d2180d5a296fe7e065193b0ba77de57c3ccfef90563248d6ff84f"
+      },
+      "score_event": {
+        "rows": 10000,
+        "hash": "42bfc90b20b3691c9d47f049051236c2d2ed44483a25c9d90f8bd41476d0a735"
+      },
+      "settlement_result": {
+        "rows": 100,
+        "hash": "7b5661a998ef68b4425b3aae4276a136110a2c39ad6052ba0b059dc8ed0920d5"
+      },
+      "guild_wallet": {
+        "rows": 100,
+        "hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467"
+      },
+      "settlement_chunk": {
+        "rows": 10,
+        "hash": "4809045cb0c792177e7a15cc94b3908f06e93387262b11946afe12d75ef5f592"
+      }
+    },
+    "schema_hash": "0ae93da8098dce36601dc7927bdb5504a2cf2a9bc1e09eba851742b737c2fa09",
+    "verification": {
+      "status": "passed",
+      "guilds": 100,
+      "events": 10000,
+      "chunks": 10,
+      "result_hash": "a5e319fd1104ab5c2e3a835d018a3623c0ae4d5fa347280698d552c970f53baa",
+      "wallet_hash": "3a807edb9556e47fd757ea6d051758aaec08cc9aa2005386e274fcfbc9ec6467",
+      "data_hash": "7c313baf3b982f1d060727f64693a5176b1a60ab9d2571fb4c5f43b00de7e2ce"
+    },
+    "schema_and_acl_equal": true,
+    "worker_allowed_checks": 3,
+    "worker_denied_checks": 3,
+    "rerun_processed_chunks": 0,
+    "rerun_skipped_chunks": 10,
+    "rerun_unchanged": true,
+    "source_unchanged": true
+  }
+}

@@ -70,6 +70,9 @@ chunks.add_argument("--guilds", type=int, default=100000)
 chunks.add_argument("--events", type=int, default=1000000)
 vacuum = commands.add_parser("vacuum", help="긴 스냅샷과 VACUUM·Heap Fetches 비교")
 vacuum.add_argument("--rows", type=int, default=100000)
+backup = commands.add_parser("backup-check", help="백업 전 기록 또는 복원 DB 비교·재실행 확인")
+backup.add_argument("--folder", required=True)
+backup.add_argument("--database")
 args = parser.parse_args()
 if args.command == "vacuum" and not 10000 <= args.rows <= 1000000:
     parser.error("행 수는 10000~1000000을 사용하세요.")
@@ -113,6 +116,9 @@ try:
     elif args.command == "chunks":
         from runner.chunks import experiment
         experiment(args.guilds, args.events)
+    elif args.command == "backup-check":
+        from runner.backup import check
+        check(args.folder, args.database)
     else:
         from runner.vacuum import experiment
         experiment(args.rows)
