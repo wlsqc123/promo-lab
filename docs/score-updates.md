@@ -43,3 +43,5 @@ flowchart LR
 기록: [결과 JSON](../experiments/score-updates.json) · [반복별 CSV](../experiments/score-updates-runs.csv) · [PC·컨테이너 환경](../experiments/score-updates-host.json)
 
 요청별 지연 CSV, 증가분, 예상 점수와 잠금 관측 원본은 results/score-updates-* 폴더에 저장합니다.
+
+공용 점수 갱신 횟수를 줄이는 방법은 [즉시 갱신과 지연 합산 비교](score-batching.md)에서 확인했습니다. 요청 응답과 길드 점수 반영의 시점을 구분해 비교했습니다.

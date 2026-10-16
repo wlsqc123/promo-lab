@@ -172,6 +172,16 @@ docker compose run --rm --build runner chunks
 ```
 
 `--guilds`와 `--events`로 규모를 바꿀 수 있습니다. 각 크기에서 워밍업 1회·측정 5회, 총 24회를 실행합니다. 준비·초기화·결과 비교를 제외한 전체 처리시간과 청크별 지연을 기록합니다. 기존 DB는 유지하고 결과는 `results/chunks-*`에 남깁니다. [처리시간과 잠금 대기 비교](docs/chunks.md)를 정리했습니다.
+## 길드 점수 지연 합산 비교
+
+한 길드에 속한 40명의 점수 요청을 즉시 반영하는 방식과, 미반영 증가분을 DB에 저장하고 작업자 하나가 모아 반영하는 방식을 비교합니다.
+
+```powershell
+docker compose run --rm --build runner score-batching
+```
+
+기본값은 유저당 50회이며 `--requests-per-user`로 바꿀 수 있습니다. 방식별 워밍업 1회·측정 5회를 별도 DB에서 실행합니다. 요청 응답과 길드 점수 반영까지의 지연을 구분하며, 기록은 `results/score-batching-*`에 남깁니다. [비교 결과와 적용 조건](docs/score-batching.md)을 정리했습니다.
+
 ## 긴 스냅샷과 VACUUM
 
 읽기 트랜잭션이 이전 스냅샷을 유지하는 동안 점수를 갱신하고, 트랜잭션 종료 전후의 VACUUM 결과를 비교합니다.

@@ -61,6 +61,8 @@ locking = commands.add_parser("locking", help="락 시간 초과·데드락·같
 locking.add_argument("--scenario", choices=["timeout", "deadlock", "ordered"], required=True)
 scores = commands.add_parser("score-updates", help="40개 연결의 유저·길드 점수 갱신 비교")
 scores.add_argument("--requests-per-user", type=int, default=50)
+batching = commands.add_parser("score-batching", help="길드 점수 즉시 갱신과 지연 합산 비교")
+batching.add_argument("--requests-per-user", type=int, default=50)
 indexes = commands.add_parser("indexes", help="집계 인덱스 3종의 실행계획·처리시간·적재 비용 비교")
 indexes.add_argument("--events", type=int, default=1000000)
 chunks = commands.add_parser("chunks", help="청크 크기별 정산 비용과 잠금 대기 비교")
@@ -75,7 +77,7 @@ if args.command == "chunks" and not (10000 <= args.guilds <= 1000000 and 0 <= ar
     parser.error("길드 10000~1000000, 이벤트 0~10000000을 사용하세요.")
 if args.command == "indexes" and not 1000 <= args.events <= 10000000:
     parser.error("이벤트 수는 1000~10000000을 사용하세요.")
-if args.command == "score-updates" and not 1 <= args.requests_per_user <= 1000:
+if args.command in ("score-updates", "score-batching") and not 1 <= args.requests_per_user <= 1000:
     parser.error("유저당 요청 수는 1~1000을 사용하세요.")
 if args.command == "prepare":
     if not (2 <= args.guilds <= 10000 and 0 <= args.events <= 1000000
@@ -101,6 +103,9 @@ try:
         experiment(args.scenario)
     elif args.command == "score-updates":
         from runner.score_updates import experiment
+        experiment(args.requests_per_user)
+    elif args.command == "score-batching":
+        from runner.score_batching import experiment
         experiment(args.requests_per_user)
     elif args.command == "indexes":
         from runner.indexes import experiment
